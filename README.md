@@ -1,35 +1,23 @@
-# passport-boilerplate
+# Wander App
 
+## About 
 
-This is your passport boilerplate.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Venenatis cras sed felis eget. Potenti nullam ac tortor vitae. Dignissim sodales ut eu sem. Pulvinar mattis nunc sed blandit libero volutpat sed cras ornare.
 
-## Setup 
+## Project Planning
 
-1. Clone the repo
-2. Rename the folder to your Project
-3. Delete the `.git` file, when you are in the root of the file, you can press `ls` and you should see a `.git` file, then go ahead and run `rm -rf .git`
+I used Trello, Figma, and Lucidchart to assist with project ideation, planning, and management.
 
+### Trello
 
-#### Setup your git repo
-0. Setup your `.env` file and add all the things you need! (look at mongoose movies for reference!)
-1. in the project root `git init`
-2. `git add .` to add all the starter code
-3. `git commit -m "setup boilerplate"` 
-4. go to github and create your github and create a repo (Without a readme or liscense you can add that later!)
-5. copy the remote address
-6. In your terminal add the remote `git remote add origin yourGithubRepo'sAddressGoesHere`
-7. `git pull origin master` If a screen pulls up asking you to do something just press `:q` and then `enter` (thats vim btw :) )
-8. `git push origin master`
+[View on Trello](https://trello.com/b/4u2xDdU0/wander-app-development)
 
-#### Setup your login
+### Wireframe
 
-0. Setup your database connection string
-1. Then Setup Your User Model, 
-2. Follow the steps from the lesson plan to get your Google login credentials for your `.env` file (create the file if you haven't), or you can just copy the ones from earlier if you want to reuse them.
-3. Setup the Code in your config passport 
-4. Setup your callback routes in your `routes/index`
-5. Setup a view and test your login!
+[View the PDF](/images/Wander App Wireframe.pdf) or [View on Figma](https://www.figma.com/file/HdWLcsoYbITtAwwN6Ydv3Z/Wander-App-Wireframe?node-id=0%3A1)
 
-#### Make a commit 
+### Entity Relationship Diagram (ERD)
 
-```git commit -m "setup up oauth and User Model"```
+[View the PDF](/images/Wander App Database ERD.pdf) or [View on Lucidchart](https://lucid.app/lucidchart/93f951cd-ab62-4596-a9ce-6531ad783277/edit?invitationId=inv_b871c7ff-bc88-43f5-bac1-1160efced7ef)
+
+### Route Charts
