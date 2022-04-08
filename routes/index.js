@@ -3,7 +3,7 @@ const passport = require('passport');
 
 // The root route renders our only view
 router.get('/', function(req, res) {
-  res.send('Index is working');
+  res.render('home');
 });
 
 // Google OAuth login route
