@@ -14,10 +14,10 @@ I used Trello, Figma, and Lucidchart to assist with project ideation, planning, 
 
 ### Wireframe
 
-[View the PDF](/images/Wander-App-Wireframe.pdf) or [View on Figma](https://www.figma.com/file/HdWLcsoYbITtAwwN6Ydv3Z/Wander-App-Wireframe?node-id=0%3A1)
+[View the PDF](https://github.com/benorloff/wander-app/blob/main/public/images/Wander-App-Wireframe.pdf) or [View on Figma](https://www.figma.com/file/HdWLcsoYbITtAwwN6Ydv3Z/Wander-App-Wireframe?node-id=0%3A1)
 
 ### Entity Relationship Diagram (ERD)
 
-[View the PDF](/images/Wander-App-Database-ERD.pdf) or [View on Lucidchart](https://lucid.app/lucidchart/93f951cd-ab62-4596-a9ce-6531ad783277/edit?invitationId=inv_b871c7ff-bc88-43f5-bac1-1160efced7ef)
+[View the PDF](https://github.com/benorloff/wander-app/blob/main/public/images/Wander-App-Database-ERD.pdf) or [View on Lucidchart](https://lucid.app/lucidchart/93f951cd-ab62-4596-a9ce-6531ad783277/edit?invitationId=inv_b871c7ff-bc88-43f5-bac1-1160efced7ef)
 
 ### Route Charts
