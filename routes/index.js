@@ -3,7 +3,7 @@ const passport = require('passport');
 
 // The root route renders our only view
 router.get('/', function(req, res) {
-  res.render('home');
+  res.render('home', { title: 'Wander App'});
 });
 
 // Google OAuth login route
