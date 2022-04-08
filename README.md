@@ -21,3 +21,5 @@ I used Trello, Figma, and Lucidchart to assist with project ideation, planning, 
 [View the PDF](https://github.com/benorloff/wander-app/blob/main/public/images/Wander-App-Database-ERD.pdf) or [View on Lucidchart](https://lucid.app/lucidchart/93f951cd-ab62-4596-a9ce-6531ad783277/edit?invitationId=inv_b871c7ff-bc88-43f5-bac1-1160efced7ef)
 
 ### Route Charts
+
+[View the PDF](https://github.com/benorloff/wander-app/blob/main/public/images/Wander-App-Route-Charts.pdf) or [View on Lucidchart](https://lucid.app/lucidchart/cf9a7724-589f-4a54-8f76-1436378715fc/edit?invitationId=inv_73e6209e-bcaa-40c4-8dd8-94f16fd3e4c5)
