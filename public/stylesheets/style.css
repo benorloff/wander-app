@@ -18,3 +18,8 @@
 .collection-item form {
   margin-top: -5px;
 }
+
+#userNavImg {
+  height: 35px;
+  border-radius: 50%;
+}
