@@ -16,12 +16,12 @@ const countrySchema = new Schema({
     },
     callingCodes: {
         type: String,
-        required: true
+        required: false
     },
     currencyCodes: [
         {
             type: String,
-            required: true
+            required: false
         }
     ],
     flagImageUri: {

@@ -6,7 +6,12 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const methodOverride = require('method-override');
-const indexRoutes = require('./routes/index');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const countriesRouter = require('./routes/countries');
+const journalsRouter = require('./routes/journals');
+const badgesRouter = require('./routes/badges');
+
 // load the env consts
 require('dotenv').config();
 
@@ -49,8 +54,11 @@ app.use(function (req, res, next) {
 });
 
 // mount all routes with appropriate base paths
-app.use('/', indexRoutes);
-
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/countries', countriesRouter);
+app.use('/journals', journalsRouter);
+app.use('/badges', badgesRouter);
 
 // invalid request, send 404 page
 app.use(function(req, res) {
