@@ -2,6 +2,22 @@ const Country = require('../models/country');
 const User = require('../models/user');
 const Journal = require('../models/journal');
 
+function index(req, res) {
+    res.send('This is the country index function')
+};
+
+function allCountries(req, res) {
+    res.send('This is the country allCountries function')
+};
+
+function show(req, res) {
+    res.send('This is the country show function')
+};
+
+function addVisitor(req, res) {
+    res.send('This is the country addVisitor function')
+};
+
 function newCountry(req, res) {
     res.render('countries/new', {title: 'Add Country'})
 }
@@ -18,6 +34,10 @@ function create(req, res) {
 }
 
 module.exports = {
-    newCountry,
+    index,
+    allCountries,
+    show,
+    addVisitor,
+    new: newCountry,
     create
 };
