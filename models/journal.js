@@ -22,6 +22,14 @@ const journalSchema = new Schema({
         type: String,
         required: true
     },
+    isPublished: {
+        type: Boolean,
+        required: true
+    },
+    isPrivate: {
+        type: Boolean,
+        required: true
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
