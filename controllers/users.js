@@ -5,7 +5,8 @@ function index(req, res) {
 };
 
 function show(req, res) {
-    res.send('This is the user show controller function')
+    console.log(req.user)
+    res.render('users/show', {title: 'User Profile'})
 };
 
 function edit(req, res) {
