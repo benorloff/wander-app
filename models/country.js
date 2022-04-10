@@ -8,9 +8,13 @@ const countrySchema = new Schema({
     },
     capital: {
         type: String, 
+        required: false
+    },
+    isoCodeAlpha2: {
+        type: String,
         required: true
     },
-    isoCode: {
+    isoCodeAlpha3: {
         type: String,
         required: true
     },
@@ -26,11 +30,11 @@ const countrySchema = new Schema({
     ],
     flagImageUri: {
         type: String,
-        required: true
+        required: false
     },
     wikiDataId: {
         type: String,
-        required: true
+        required: false
     },
     usersVisited: [
         {
