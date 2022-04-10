@@ -1,0 +1,16 @@
+<%- include('../partials/header') %> 
+
+<div class="container">
+    <h1>All Countries</h1>
+    <% countries.forEach(c => { %>
+        <div class="country-list-result-container">
+            <img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>">
+            <div class="country-list-result-info">
+                <h5><%= c.name %></h5>
+                <a href="/countries/<%= c.id %>" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+<%- include('../partials/footer') %> 

@@ -7,7 +7,9 @@ function index(req, res) {
 };
 
 function allCountries(req, res) {
-    res.send('This is the country allCountries function')
+    Country.find({}, function (err, countries) {
+        res.render('countries/all', {title: 'All Countries', countries})
+    })
 };
 
 function show(req, res) {

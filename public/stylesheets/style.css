@@ -41,3 +41,35 @@
   flex-basis: 50%;
   justify-content: flex-end;
 }
+
+.country-list-result-container {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  box-shadow: 0 0 10px #bbbbbb;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.country-list-result-container img {
+  height: 50px;
+}
+
+.country-list-result-info {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.country-list-result-info h5 {
+  flex-grow: 4;
+  align-content: center;
+}
+
+.country-list-result-info button {
+  flex-grow: 1;
+  align-items: center;
+}

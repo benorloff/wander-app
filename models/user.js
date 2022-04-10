@@ -14,7 +14,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    hometown: String,
+    hometown: {
+        type: String,
+        required: false
+    },
     avatar: {
         type: String,
         required: true
