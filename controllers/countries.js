@@ -13,7 +13,10 @@ function allCountries(req, res) {
 };
 
 function show(req, res) {
-    res.send('This is the country show function')
+    Country.findById(req.params.id)
+    .exec(function(err, country) {
+        res.render('countries/show', {title: country.name, country})
+    })
 };
 
 function addVisitor(req, res) {

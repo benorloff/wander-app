@@ -1,7 +1,25 @@
-<%- include('partials/header') %> 
+<%- include('../partials/header') %> 
 
-<h1>Country View</h1>
+<div class="bg-light" style="position: sticky; top: 72px;">
+    <nav class="container bd-subnavbar py-2" aria-label="Secondary navigation">
+        <div class="container-xxl d-flex align-items-md-center">
+            <h2><%= country.name %></h2>
+        </div>
+    </nav>
+</div>
+
+<div class="map-container" style="height: 500px; background-color: blue;">
+    <div id='map' style='width: 400px; height: 300px;'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYmVub3Jsb2ZmIiwiYSI6ImNsMXR0aXE3cjBpbDMzaXF2bGdkcHJ6cHAifQ.Ju341IcUlEvqkZXhSkY1Aw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11'
+    });
+    </script>
+
+</div>
 
 
 
-<%- include('partials/footer') %> 
+<%- include('../partials/footer') %> 
