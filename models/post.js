@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const journalSchema = new Schema({
+const postSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: false
     },
     content: {
         type: String, 
@@ -16,11 +16,11 @@ const journalSchema = new Schema({
     },
     countryName: {
         type: String,
-        required: true
+        required: false
     },
     countryFlagUri: {
         type: String,
-        required: true
+        required: false
     },
     isPublished: {
         type: Boolean,
@@ -45,9 +45,13 @@ const journalSchema = new Schema({
     userUri: {
         type: String,
         required: true
+    },
+    postType: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
 });
 
-module.exports = mongoose.model('Journal', journalSchema);
+module.exports = mongoose.model('Post', postSchema);

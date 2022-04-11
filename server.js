@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const countriesRouter = require('./routes/countries');
-const journalsRouter = require('./routes/journals');
+const postsRouter = require('./routes/posts');
 const badgesRouter = require('./routes/badges');
 
 // load the env consts
@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/countries', countriesRouter);
-app.use('/journals', journalsRouter);
+app.use('/posts', postsRouter);
 app.use('/badges', badgesRouter);
 
 // invalid request, send 404 page

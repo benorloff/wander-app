@@ -1,6 +1,6 @@
 const Country = require('../models/country');
 const User = require('../models/user');
-const Journal = require('../models/journal');
+const Journal = require('../models/post');
 
 function index(req, res) {
     res.send('This is the country index function')

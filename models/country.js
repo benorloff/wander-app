@@ -47,7 +47,7 @@ const countrySchema = new Schema({
     posts: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Journal'
+            ref: 'Post'
         }
     ]
 }, {
