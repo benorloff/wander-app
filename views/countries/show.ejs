@@ -1,6 +1,6 @@
 <%- include('../partials/header') %> 
 
-<div class="bg-light" style="position: sticky; top: 72px;">
+<div class="subnavbar" style="position: sticky; top: 72px;">
     <nav class="container bd-subnavbar py-2" aria-label="Secondary navigation">
         <div class="container-xxl d-flex align-items-md-center">
             <h2><%= country.name %></h2>
@@ -9,15 +9,41 @@
 </div>
 
 <div class="map-container" style="height: 500px; background-color: blue;">
-    <div id='map' style='width: 400px; height: 300px;'></div>
+    <div id='map' style='width: 100%; height: 600px;'></div>
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmVub3Jsb2ZmIiwiYSI6ImNsMXR0aXE3cjBpbDMzaXF2bGdkcHJ6cHAifQ.Ju341IcUlEvqkZXhSkY1Aw';
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11'
+        style: 'mapbox://styles/benorloff/cl1ttpomo000m14o640ovilw5',
+        center: [0, 0],
+        zoom: 2
+    });
+
+    map.on('load', function() {
+      map.addLayer(
+        {
+          id: 'country-boundaries',
+          source: {
+            type: 'vector',
+            url: 'mapbox://mapbox.country-boundaries-v1',
+          },
+          'source-layer': 'country_boundaries',
+          type: 'fill',
+          paint: {
+            'fill-color': '#d2361e',
+            'fill-opacity': 0.4,
+          },
+        },
+        'country-label'
+      );
+
+      map.setFilter('country-boundaries', [
+        "in",
+        "iso_3166_1_alpha_3",
+        'AFG'
+      ]);
     });
     </script>
-
 </div>
 
 

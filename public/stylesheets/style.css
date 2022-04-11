@@ -1,3 +1,31 @@
+:root {
+  --color-surface-dark: #121212;
+  --color-gray-dark: #3B3B3B;
+  --color-gray-light: #CFCFCF;
+  --color-primary: #4CAF50;
+  --color-green-light: #81C784;
+  --color-green-dark: #388E3C;
+  --color-teal-dark: #00796B;
+  --color-red-light: #FFCDD2;
+  --color-red-medium: #E57373;
+  --color-red-dark: #F44336;
+  --color-orange-light: #FFCC80;
+  --color-orange-medium: #FFB74D;
+  --color-orange-dark: #FF9800;
+  --color-purple-light: #E1BEE7;
+  --color-purple-medium: #CE93D8;
+  --color-purple-dark: #9C27B0;
+  --color-blue-light: #BBDEFB;
+  --color-blue-medium: #90CAF9;
+  --color-blue-dark: #1976D2;
+  --color-text-light: #FAFAFA;
+  --color-text-dark: #121212;
+}
+
+body {
+  background-color: var(--color-surface-dark);
+}
+
 .brand-logo {
   margin-left: 15px;
 }
@@ -72,4 +100,8 @@
 .country-list-result-info button {
   flex-grow: 1;
   align-items: center;
+}
+
+.subnavbar {
+  background-color: var(--color-gray-dark);
 }
