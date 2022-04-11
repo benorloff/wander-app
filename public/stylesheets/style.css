@@ -119,12 +119,17 @@ p, h1, h2, h3, h4, h5, h6, button {
 }
 
 /*-----USER PROFILE-----*/
+
+/* User Hero */
+
 .profile-hero {
   background-image: url("/images/wander-user-hero.jpeg");
   height: 300px;
   background-position: bottom;
   background-size: cover;
 }
+
+/* User Intro */
 
 .profile-intro {
   display: flex;
@@ -137,4 +142,24 @@ p, h1, h2, h3, h4, h5, h6, button {
   border-radius: 50%;
   border: 5px solid var(--color-primary);
   margin-top: -48px;
+}
+
+/* User Stats */
+
+.profile-stats {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats-card {
+  display: flex;
+}
+
+.flags-collected {
+  display: flex;
+  flex-direction: row;
+}
+
+.flags-collected img {
+  height: 35px;
 }

@@ -1,12 +1,16 @@
 const User = require('../models/user');
+const Country = require('../models/country');
 
 function index(req, res) {
     res.send('This is the user index controller function')
 };
 
 function show(req, res) {
-    console.log(req.user)
-    res.render('users/show', {title: 'User Profile'})
+    console.log(req.user);
+    Country.find({usersVisited: req.user.id}, function (err, countries) {
+        console.log(countries);
+        res.render('users/show', {title: 'User Profile', countries})
+    })
 };
 
 function edit(req, res) {

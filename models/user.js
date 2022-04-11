@@ -22,18 +22,24 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    countries: {
+    countries: [
+        {
         type: Schema.Types.ObjectId,
         ref: 'Country'
-    },
-    posts: {
+        }
+    ],
+    posts: [
+        {
         type: Schema.Types.ObjectId,
         ref: 'Journal'
-    },
-    badges: {
+        }
+    ],
+    badges: [
+        {
         type: Schema.Types.ObjectId,
         ref: 'Badge'
-    }
+        }
+    ]
 }, {
     timestamps: true
 });

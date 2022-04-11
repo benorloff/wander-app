@@ -2,17 +2,34 @@
 
 <div class="profile-hero"></div>
 
-<div class="container profile-intro">
-    <div class="profile-avatar">
-        <img src="<%= user.avatar %>" alt="Avatar">
+<div class="container">
+    <div class="profile-intro">
+        <div class="profile-avatar">
+            <img src="<%= user.avatar %>" alt="Avatar">
+        </div>
+        <div class="profile-bio">
+            <h1><%= user.name %></h1>
+        </div>
+        <div class="profile-actions">
+            <button class="btn btn-primary">Action #1</button>
+            <button class="btn btn-primary">Action #2</button>
+        </div>
     </div>
-    <div class="profile-bio">
-        <h1><%= user.name %></h1>
+    <div class="profile-stats">
+        <div class="stats-card flags-collected">
+            <h3>Flags Collected</h3>
+            <% countries.forEach(c => { %>
+                <img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>">
+            <% }); %>
+        </div>
+        <div class="stats-card world-percent">
+            <h3>World Percent</h3>
+        </div>
+        <div class="stats-card badges-collected">
+            <h3>Badges Collected</h3>
+        </div>
     </div>
-    <div class="profile-actions">
-        <button class="btn btn-primary">Action #1</button>
-        <button class="btn btn-primary">Action #2</button>
-    </div>
+
 </div>
 
 <%- include('../partials/footer') %>
