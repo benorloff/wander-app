@@ -18,10 +18,12 @@ const countrySchema = new Schema({
         type: String,
         required: true
     },
-    callingCodes: {
+    callingCodes: [
+        {
         type: String,
         required: false
-    },
+        }
+    ],
     currencyCodes: [
         {
             type: String,

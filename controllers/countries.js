@@ -20,15 +20,43 @@ function show(req, res) {
 };
 
 function addVisitor(req, res) {
-    Country.findById(req.params.id, function(err, foundCountry) {
+    Country.findById(req.params.id).exec(function(err, foundCountry) {
+        console.log(req.params.id);
+        console.log(foundCountry);
         if(err) {
             res.send(err);
         } else {
-            foundCountry.usersVisited += user._id;
-            res.render('countries/all')
+            foundCountry.usersVisited.push(req.user._id);
+            foundCountry.save();
+            User.findById(req.user._id).exec(function(err, foundUser) {
+                foundUser.countries.push(foundCountry._id);
+                foundUser.save();
+            })
+            console.log(foundCountry);
+            res.redirect('/countries/all');
         }
     })
 };
+
+function removeVisitor(req, res) {
+    Country.findById(req.params.id).exec(function(err, foundCountry) {
+        if(err) {
+            res.send(err);
+        } else {
+            const userIdx = foundCountry.usersVisited.indexOf(req.user._id);
+            console.log(`${userIdx} <- user index in array`);
+            if (userIdx > -1) {
+                foundCountry.usersVisited.splice(userIdx, 1);
+                foundCountry.save();
+                User.findById(req.user._id).exec(function(err, foundUser) {
+                    const countryIdx = foundUser.countries.indexOf(foundCountry._id);
+                    foundUser.countries.splice(countryIdx, 1);
+                    foundUser.save();
+                })
+            }
+        }
+    })
+}
 
 function newCountry(req, res) {
     res.render('countries/new', {title: 'Add Country'})
@@ -50,6 +78,7 @@ module.exports = {
     allCountries,
     show,
     addVisitor,
+    removeVisitor,
     new: newCountry,
     create
 };

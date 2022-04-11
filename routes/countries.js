@@ -11,6 +11,8 @@ router.get('/all', countriesCtrl.allCountries);
 router.get('/:id', countriesCtrl.show);
 // Add a user's id to a country's usersVisited array
 router.post('/:id', isLoggedIn, countriesCtrl.addVisitor);
+// Add a user's id to a country's usersVisited array
+router.put('/:id', isLoggedIn, countriesCtrl.removeVisitor);
 // Display the form for adding a new country (this may be deprecated)
 router.get('/new', isLoggedIn, countriesCtrl.new);
 // Create the new country (this may be deprecated)

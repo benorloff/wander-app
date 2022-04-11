@@ -1,3 +1,5 @@
+/*-----GLOBAL STYLES-----*/
+
 :root {
   --color-surface-dark: #121212;
   --color-gray-dark: #3B3B3B;
@@ -104,6 +106,12 @@ p, h1, h2, h3, h4, h5, h6, button {
 .country-list-result-info button {
   flex-grow: 1;
   align-items: center;
+}
+
+/*-----NAV-----*/
+
+.user-nav-img {
+  border: 3px solid var(--color-primary);
 }
 
 .subnavbar {

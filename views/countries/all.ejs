@@ -8,7 +8,11 @@
             <div class="country-list-result-info">
                 <h5><%= c.name %></h5>
                 <a href="/countries/<%= c.id %>" class="btn btn-primary">Explore</a>
-                <a href="/countries/<%= c.id %>?_method=POST" class="btn btn-primary">Add</a>
+                <% if (user && c.usersVisited.includes(user._id) ) { %>
+                    <form action="/countries/<%= c.id %>?_method=PUT" method="POST"><input type="submit" value="Remove"class="btn btn-primary"></form>
+                <% } else { %>
+                    <form action="/countries/<%= c.id %>" method="POST"><input type="submit" value="Add"class="btn btn-primary"></form>
+                <% } %>
             </div>
         </div>
     <% }) %>
