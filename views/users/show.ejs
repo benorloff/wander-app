@@ -15,15 +15,20 @@
             <button class="btn btn-primary">Action #2</button>
         </div>
     </div>
+    <h2>Stats</h2>
     <div class="profile-stats">
         <div class="stats-card flags-collected">
-            <h3>Flags Collected</h3>
-            <% countries.forEach(c => { %>
-                <img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>">
-            <% }); %>
+            <h3>Flags Collected <small class="text-muted">(<%= countries.length %> of 249)</small></h3>
+            <div>
+                <% countries.forEach(c => { %>
+                    <img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>" title="<%= c.name %>">
+                <% }); %>
+            </div>
         </div>
         <div class="stats-card world-percent">
             <h3>World Percent</h3>
+            <span><%= Math.round(countries.length / 249 * 100) %>%</span>
+
         </div>
         <div class="stats-card badges-collected">
             <h3>Badges Collected</h3>

@@ -28,7 +28,7 @@ body {
   background-color: var(--color-surface-dark);
 }
 
-p, h1, h2, h3, h4, h5, h6, button {
+p, h1, h2, h3, h4, h5, h6, span, button {
   color: var(--color-text-light);
 }
 
@@ -136,6 +136,7 @@ p, h1, h2, h3, h4, h5, h6, button {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  margin-bottom: 50px;
 }
 
 .profile-avatar img {
@@ -148,18 +149,29 @@ p, h1, h2, h3, h4, h5, h6, button {
 
 .profile-stats {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  gap: 25px;
 }
 
 .stats-card {
-  display: flex;
+  background-color: var(--color-gray-dark);
+  padding: 25px;
+  border-radius: 5px;
 }
 
 .flags-collected {
-  display: flex;
-  flex-direction: row;
+  flex-basis: 50%;
 }
 
 .flags-collected img {
   height: 35px;
+}
+
+.world-percent {
+  flex-grow: 1;
+}
+
+.badges-collected {
+  flex-grow: 2;
 }
