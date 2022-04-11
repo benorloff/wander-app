@@ -20,7 +20,14 @@ function show(req, res) {
 };
 
 function addVisitor(req, res) {
-    res.send('This is the country addVisitor function')
+    Country.findById(req.params.id, function(err, foundCountry) {
+        if(err) {
+            res.send(err);
+        } else {
+            foundCountry.usersVisited += user._id;
+            res.render('countries/all')
+        }
+    })
 };
 
 function newCountry(req, res) {

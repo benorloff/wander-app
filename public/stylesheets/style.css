@@ -26,6 +26,10 @@ body {
   background-color: var(--color-surface-dark);
 }
 
+p, h1, h2, h3, h4, h5, h6, button {
+  color: var(--color-text-light);
+}
+
 .brand-logo {
   margin-left: 15px;
 }
@@ -104,4 +108,25 @@ body {
 
 .subnavbar {
   background-color: var(--color-gray-dark);
+}
+
+/*-----USER PROFILE-----*/
+.profile-hero {
+  background-image: url("/images/wander-user-hero.jpeg");
+  height: 300px;
+  background-position: bottom;
+  background-size: cover;
+}
+
+.profile-intro {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.profile-avatar img {
+  border-radius: 50%;
+  border: 5px solid var(--color-primary);
+  margin-top: -48px;
 }
