@@ -19,30 +19,30 @@ function newPost(req, res) {
     })
 };
 
-function create(req, res) {
-    // Convert checkbox input to boolean
-    console.log(req.body);
+async function create(req, res) {
+    req.body.user = req.user._id;
+    req.body.userName = req.user.name;
+    req.body.userAvatar = req.user.avatar;
+    req.body.userUri = `/users/${req.user._id}`;
     req.body.isPrivate = !!req.body.isPrivate;
-    Post.create(req.body, function(err, post) {
-        if (err) {
-            console.log(err);
-            return res.redirect('/posts/new');
-        }
-        post.isPublished = req.params.isPublished;
-        post.user = req.user._id;
-        post.userName = req.user.name;
-        post.userAvatar = req.user.avatar;
-        post.userUri = `/users/${req.user._id}`;
-        Country.find({name: req.body.country}, function(err, country) {
-            if (err) return res.redirect('/posts/new');
-            post.countryName = country.name;
-            post.countryFlagUri = country.flagImageUri;
+    if (req.body.isPublished === 'Publish') {
+        req.body.isPublished = true;
+    } else {
+        req.body.isPublished = false;
+    };
+    try {
+        Post.create(req.body, function(err, post) {
+            if (err) {
+                console.log(err);
+                return res.redirect('/posts/new');
+            }
+            res.redirect(`/users/${req.user._id}`);
         })
-        post.save();
-        console.log(post);
-        res.redirect(`/users/${user._id}`);
-    })
-};
+    } catch (err) {
+        console.log(err);
+        return res.redirect('/posts/new');
+    }
+}
 
 function edit(req, res) {
     res.send('This is the posts edit function')

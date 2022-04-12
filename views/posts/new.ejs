@@ -17,7 +17,7 @@
                     <input required name="country" class="form-control" list="datalistOptions" id="form-field-country" placeholder="Type to search...">
                     <datalist id="datalistOptions">
                         <% countries.forEach(c => { %>
-                            <option value="<%= c.name %>">
+                            <option value="<%= c._id %>"><%= c.name %></option>
                         <% }); %>
                     </datalist>
                 </div>
@@ -33,8 +33,8 @@
         </div>
         <input type="hidden" name="postType" value="journal">
         <div style="display: flex;">
-            <form action="/posts?isPublished=false" method="POST"><input type="submit" value="Save Draft"class="btn btn-outline-primary"></form>
-            <form action="/posts?isPublished=true" method="POST"><input type="submit" value="Publish"class="btn btn-primary"></form>
+            <input type="submit" name="isPublished" value="Save Draft" class="btn btn-outline-primary">
+            <input type="submit" name="isPublished" value="Publish" class="btn btn-primary">
         </div>
     </form>
 </div>
