@@ -28,7 +28,7 @@ body {
   background-color: var(--color-surface-dark);
 }
 
-p, h1, h2, h3, h4, h5, h6, span, button {
+p, h1, h2, h3, h4, h5, h6, span, button, label {
   color: var(--color-text-light);
 }
 
@@ -76,14 +76,16 @@ p, h1, h2, h3, h4, h5, h6, span, button {
   justify-content: flex-end;
 }
 
+/*----COUNTRIES-----*/
+
 .country-list-result-container {
   display: flex;
   flex-direction: row;
   align-items:center;
-  box-shadow: 0 0 10px #bbbbbb;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
+  background-color: var(--color-gray-dark);
 }
 
 .country-list-result-container img {

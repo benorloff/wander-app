@@ -1,6 +1,43 @@
 <%- include('../partials/header') %>
 
-<h1>New Journal</h1>
+<div class="container">
+    <h1>New Journal</h1>
+    <form action="/posts" method="POST">
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" required name="title" class="form-control" id="form-field-title" aria-describedby="form-field-title-help">
+                    <div id="form-field-title-help" class="form-text">Hint: make it short and sweet!</div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input required name="country" class="form-control" list="datalistOptions" id="form-field-country" placeholder="Type to search...">
+                    <datalist id="datalistOptions">
+                        <% countries.forEach(c => { %>
+                            <option value="<%= c.name %>">
+                        <% }); %>
+                    </datalist>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label for="content" class="form-label">Content</label>
+          <textarea name="content" required class="form-control" rows="10" id="form-field-content" autocomplete="off"></textarea>
+        </div>
+        <div class="form-check form-switch">
+            <input name="isPrivate" class="form-check-input" type="checkbox" role="switch" id="privacy-toggle">
+            <label class="form-check-label" for="privacy-toggle">Make it private?</label>
+        </div>
+        <input type="hidden" name="postType" value="journal">
+        <div style="display: flex;">
+            <form action="/posts?isPublished=false" method="POST"><input type="submit" value="Save Draft"class="btn btn-outline-primary"></form>
+            <form action="/posts?isPublished=true" method="POST"><input type="submit" value="Publish"class="btn btn-primary"></form>
+        </div>
+    </form>
+</div>
 
 
 <%- include('../partials/footer') %>
