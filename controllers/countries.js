@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Country = require('../models/country');
 const User = require('../models/user');
-const Journal = require('../models/post');
+const Post = require('../models/post');
 
 const options = {
     method: 'GET',
@@ -25,6 +25,7 @@ function allCountries(req, res) {
 
 async function show(req, res) {
     const country = await Country.findById(req.params.id);
+    const posts = await Post.find({country: req.params.id}).exec();
     const options = {
         method: 'GET',
         url: `https://wft-geo-db.p.rapidapi.com/v1/geo/countries/${country.isoCodeAlpha2}`,
@@ -34,8 +35,7 @@ async function show(req, res) {
         }
       };
     axios.request(options).then(function (response) {
-        console.log(response.data.data);
-        res.render('countries/show', {title: country.name, country, data: response.data.data});
+        res.render('countries/show', {title: country.name, country, posts, data: response.data.data});
     }).catch(function (error) {
         console.error(error);
     });

@@ -1,9 +1,15 @@
 <%- include('../partials/header') %> 
 
-<div class="subnavbar" style="position: sticky; top: 72px;">
+<div class="subnavbar" style="position: sticky; top: 72px; z-index: 1000;">
     <nav class="container bd-subnavbar py-2" aria-label="Secondary navigation">
-        <div class="container-xxl d-flex align-items-md-center">
+        <div class="container-xxl d-flex align-items-md-center justify-content-between">
+          <div class="d-flex align-items-md-center left">
+            <img src="/images/flags/<%= country.isoCodeAlpha2 %>.png" alt="<%= country.name %>" title="<%= country.name %>">  
             <h2><%= country.name %></h2>
+          </div>
+          <div class="d-flex align-items-md-center right">
+            <form action="/posts/new?" method="GET"><button class="btn btn-outline-primary">Add Journal</button></form>
+          </div>
         </div>
     </nav>
 </div>
@@ -11,23 +17,59 @@
 <%- include('../partials/map') %>
 
 <div class="container">
-  <div class="row justify-content-between">
-    <div class="col-3">
-      <h3>Capital</h3>
-      <p><%= data.capital %></p>
+  <div class="country-stats" id="info">
+    <div class="row justify-content-between">
+      <div class="col">
+        <h4>Wanderers</h4>
+        <p><%= country.usersVisited.length %></p>
+      </div>
+      <div class="col">
+        <h4>Journals</h4>
+        <p><%= posts.length %></p>
+      </div>
+      <div class="col">
+        <h4>Capital</h4>
+        <p><%= data.capital %></p>
+      </div>
+      <div class="col">
+        <h4>Calling</h4>
+        <p><%= data.callingCode %></p>
+      </div>
+      <div class="col">
+        <h4>Currency</h4>
+        <p><%= data.currencyCodes %></p>
+      </div>
+      <div class="col">
+        <h4>Regions</h4>
+        <p><%= data.numRegions %></p>
+      </div>
     </div>
-    <div class="col-3">
-      <h3>Calling Code</h3>
-      <p><%= data.callingCode %></p>
+  </div>
+
+  <% if (user) { %>
+    <h2>My Journals</h2>
+    <div class="my-posts">
+      <% posts.forEach(p => { %>
+        <% if (p.user === user.id) { %>
+          <div class="post-card">
+            <h4><%= p.title %></h4>
+            <p><%= p.content %></p>
+          </div>
+        <% } %>
+      <% }) %>
     </div>
-    <div class="col-3">
-      <h3>Currency Codes</h3>
-      <p><%= data.currencyCodes %></p>
-    </div>
-    <div class="col-3">
-      <h3># of Regions</h3>
-      <p><%= data.numRegions %></p>
-    </div>
+  <% } %>
+  
+  <h2>Community Journals</h2>
+  <div class="community-posts">
+    <% posts.forEach(p => { %>
+      <% if (p.isPrivate === false) { %>
+        <div class="post-card">
+          <h4><%= p.title %></h4>
+          <p><%= p.content %></p>
+        </div>
+      <% } %> 
+    <% }); %>
   </div>
 </div>
 
