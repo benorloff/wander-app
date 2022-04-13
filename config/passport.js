@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const User = require('../models/user');
+const Badge = require('../models/badge');
 
 // configuring Passport!
 passport.use(new GoogleStrategy({
@@ -21,12 +22,15 @@ passport.use(new GoogleStrategy({
         email: profile.emails[0].value,
         avatar: profile.photos[0].value
       }, function(err, createdUser){
-        if(createdUser) return cb(null, createdUser)
+        if(createdUser) {
+          addBadge(createdUser);
+          return cb(null, createdUser);
+        }
         if(err) return cb(err)
       })
     })
   })
-  );
+);
 
 passport.serializeUser(function(user, done) {
   done(null, user._id);
@@ -39,5 +43,13 @@ passport.deserializeUser(function(id, done) {
   })
 });
 
-
+function addBadge(createdUser) {
+  Badge.findOne({name: 'userVerified'}, function(err, badge) {
+    if (err) return res.send(err);
+    if (badge) {
+      badge.usersCollected.push(createdUser._id);
+      badge.save();
+    }
+  })
+};
 
