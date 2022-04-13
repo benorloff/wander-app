@@ -39,7 +39,7 @@
         <% if (userPosts.length > 0) { %>
             <% userPosts.forEach(p => { %>
                 <div class="post-card">
-                    <h3><%= p.title %></h3>
+                    <h3><a href="/posts/<%= p._id %>"><%= p.title %></a></h3>
                     <p><%= p.content %></p>
                 </div>
             <% }); %>
