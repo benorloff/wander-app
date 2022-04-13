@@ -2,7 +2,41 @@
 
 <div class="container">
     <div class="post-container">
-        
+        <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" required name="title" class="form-control" id="form-field-title" aria-describedby="form-field-title-help" placeholder="<%= post.title %>">
+                        <div id="form-field-title-help" class="form-text">Hint: make it short and sweet!</div>
+                      </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <input required type="text" name="country" class="form-control" list="datalistOptions" id="form-field-country" placeholder="Type to search...">
+                        <datalist id="datalistOptions">
+                            <% countries.forEach(c => { %>
+                                <option value="<%= c._id %>"><%= c.name %></option>
+                            <% }); %>
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+              <label for="content" class="form-label">Content</label>
+              <textarea name="content" required class="form-control" rows="10" id="form-field-content" autocomplete="off" placeholder="<%= post.content %>"></textarea>
+            </div>
+            <div class="form-check form-switch">
+                <input name="isPrivate" class="form-check-input" type="checkbox" role="switch" id="privacy-toggle">
+                <label class="form-check-label" for="privacy-toggle">Make it private?</label>
+            </div>
+            <input type="hidden" name="postType" value="journal">
+            <div style="display: flex;">
+                <input type="submit" name="isPublished" value="Save Draft" class="btn btn-outline-primary">
+                <input type="submit" name="isPublished" value="Publish" class="btn btn-primary">
+            </div>
+        </form>
     </div>
 </div>
 
