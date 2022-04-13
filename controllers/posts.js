@@ -2,15 +2,22 @@ const Post = require('../models/post');
 const Country = require('../models/country');
 
 function index(req, res) {
-    res.send('This is the posts index function')
+    Post.find({user: req.user._id}, function(err, posts) {
+        res.render('users/posts', {title: 'My Posts', posts})
+    })
 };
 
 function allPosts(req, res) {
-    res.send('This is the posts allPosts function')
+    Post.find({}, function(err, posts) {
+        res.render('posts/all', {title: 'All Posts', posts})
+    })
 };
 
 function show(req, res) {
-    res.send('This is the posts show function')
+    Post.findById(req.params.id)
+    .exec(function(err, post) {
+        res.render('posts/show', {title: post.title, post})
+    })
 };
 
 function newPost(req, res) {

@@ -154,6 +154,7 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
   flex-flow: row wrap;
   align-content: flex-start;
   gap: 25px;
+  margin-bottom: 50px;
 }
 
 .stats-card {
@@ -176,4 +177,18 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
 
 .badges-collected {
   flex-grow: 2;
+}
+
+/* User Posts */
+
+.profile-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.post-card {
+  background-color: var(--color-gray-dark);
+  padding: 25px;
+  border-radius: 5px;
 }

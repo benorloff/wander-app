@@ -18,12 +18,10 @@ const countrySchema = new Schema({
         type: String,
         required: true
     },
-    callingCodes: [
-        {
+    callingCode: {
         type: String,
-        required: false
-        }
-    ],
+        required: false    
+    },
     currencyCodes: [
         {
             type: String,
@@ -32,6 +30,10 @@ const countrySchema = new Schema({
     ],
     flagImageUri: {
         type: String,
+        required: false
+    },
+    numRegions: {
+        type: Number,
         required: false
     },
     wikiDataId: {

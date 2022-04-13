@@ -1,9 +1,20 @@
+const axios = require('axios');
 const Country = require('../models/country');
 const User = require('../models/user');
 const Journal = require('../models/post');
 
-function index(req, res) {
-    res.send('This is the country index function')
+const options = {
+    method: 'GET',
+    url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/countries/US',
+    headers: {
+      'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST,
+      'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY
+    }
+  };
+
+async function index(req, res) {
+    const userCountries = await Country.find({usersVisited: req.user._id}).exec();
+    res.render('users/countries', {title: 'My Countries', userCountries})
 };
 
 function allCountries(req, res) {
@@ -12,11 +23,32 @@ function allCountries(req, res) {
     })
 };
 
-function show(req, res) {
-    Country.findById(req.params.id)
-    .exec(function(err, country) {
-        res.render('countries/show', {title: country.name, country})
-    })
+async function show(req, res) {
+    const country = await Country.findById(req.params.id);
+    const options = {
+        method: 'GET',
+        url: `https://wft-geo-db.p.rapidapi.com/v1/geo/countries/${country.isoCodeAlpha2}`,
+        headers: {
+          'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST,
+          'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY
+        }
+      };
+    axios.request(options).then(function (response) {
+        console.log(response.data.data);
+        res.render('countries/show', {title: country.name, country, data: response.data.data});
+    }).catch(function (error) {
+        console.error(error);
+    });
+    // // Add response data to db
+    // if (country.capital === "") {
+    //     country.capital = response.data.capital;
+    //     country.callingCode = response.data.callingCode;
+    //     country.currencyCodes = response.data.currencyCodes;
+    //     country.flagImageUri = response.data.flagImageUri;
+    //     country.numRegions = response.data.numRegions;
+    //     country.wikiDataId = response.data.wikiDataId;
+    //     country.save();
+    // }
 };
 
 function addVisitor(req, res) {
@@ -38,22 +70,6 @@ function addVisitor(req, res) {
         }
     })
 };
-
-// async function addVisitor(req, res) {
-//     try {
-//         console.log('country hit');
-//         const foundCountry = await Country.findById(req.params.id);
-//         const foundUser = await User.findById(req.user._id);
-//         foundCountry.usersVisited.push(req.user._id);
-//         foundCountry.save();
-//         foundUser.countries.push(foundCountry._id);
-//         foundUser.save();
-//         res.render('/countries/all', {title: 'Countries'});
-//     }
-//     catch(err) {
-//         res.send(err)
-//     }
-// };
 
 function removeVisitor(req, res) {
     Country.findById(req.params.id).exec(function(err, foundCountry) {
