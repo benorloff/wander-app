@@ -2,15 +2,7 @@ const axios = require('axios');
 const Country = require('../models/country');
 const User = require('../models/user');
 const Post = require('../models/post');
-
-const options = {
-    method: 'GET',
-    url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/countries/US',
-    headers: {
-      'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST,
-      'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY
-    }
-  };
+const Badge = require('../models/badge');
 
 async function index(req, res) {
     const userCountries = await Country.find({usersVisited: req.user._id}).exec();
@@ -51,45 +43,29 @@ async function show(req, res) {
     // }
 };
 
-function addVisitor(req, res) {
-    Country.findById(req.params.id).exec(function(err, foundCountry) {
-        console.log(req.params.id);
-        console.log(foundCountry);
-        if(err) {
-            res.send(err);
-        } else {
-            foundCountry.usersVisited.push(req.user._id);
-            foundCountry.save();
-            User.findById(req.user._id).exec(function(err, foundUser) {
-                console.log(foundUser);
-                foundUser.countries.push(req.params.id);
-                foundUser.save();
-            })
-            console.log(foundCountry);
-            res.redirect('/countries/all');
-        }
-    })
+async function addVisitor(req, res) {
+    try {
+        const country = await Country.findById(req.params.id);
+        country.usersVisited.push(req.user._id);
+        country.save();
+        res.redirect('/countries/all');
+    } catch (err) {
+        res.send(err);
+    }
 };
 
-function removeVisitor(req, res) {
-    Country.findById(req.params.id).exec(function(err, foundCountry) {
-        if(err) {
-            res.send(err);
-        } else {
-            const userIdx = foundCountry.usersVisited.indexOf(req.user._id);
-            console.log(`${userIdx} <- user index in array`);
-            if (userIdx > -1) {
-                foundCountry.usersVisited.splice(userIdx, 1);
-                foundCountry.save();
-                User.findById(req.user._id).exec(function(err, foundUser) {
-                    const countryIdx = foundUser.countries.indexOf(foundCountry._id);
-                    foundUser.countries.splice(countryIdx, 1);
-                    foundUser.save();
-                    res.redirect('/countries/all');
-                })
-            }
+async function removeVisitor(req, res) {
+    try {
+        const country = await Country.findById(req.params.id);
+        const userIdx = await country.usersVisited.indexOf(req.user._id);
+        if (userIdx > -1) {
+            country.usersVisited.splice(userIdx, 1);
+            country.save();
+            res.redirect('/countries/all');
         }
-    })
+    } catch (err) {
+        res.send(err);
+    }
 }
 
 function newCountry(req, res) {
