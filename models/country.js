@@ -45,6 +45,12 @@ const countrySchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'User'
         }
+    ],
+    usersLiked: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
     ]
 }, {
     timestamps: true
