@@ -35,7 +35,7 @@
                 <% if (user) { %>
                     <div class="dropdown text-end">
                         <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUserAvatar" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="<%= user.avatar %>" alt="Google Avatar" id="userNavImg" class="user-nav-img">
+                            <img src="<%= user.avatar %>" id="userNavImg" class="user-nav-img">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="userMenuButton">
                             <li class="dropdown-item-text">Signed in as <strong><%= user.name %></strong></li>

@@ -6,6 +6,10 @@ const badgeSchema = new Schema ({
         type: String,
         required: true
     },
+    numValue: {
+        type: Number,
+        required: true
+    },
     badgeImageUri: {
         type: String,
         required: true
