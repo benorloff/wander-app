@@ -51,8 +51,10 @@ async function create(req, res) {
     }
 }
 
-function edit(req, res) {
-    res.send('This is the posts edit function')
+async function edit(req, res) {
+    const post = await Post.findById(req.params.id);
+    const countries = await Country.find({}).exec();
+    res.render('posts/edit', {title: post.title, post, countries})
 };
 
 function update(req, res) {
@@ -60,7 +62,10 @@ function update(req, res) {
 };
 
 function deletePost(req, res) {
-    res.send('This is the posts deletePost function')
+    Post.findByIdAndRemove(req.params.id, function(err, deletedPost) {
+        console.log(deletedPost);
+        res.render('users/show', {title: `${req.user.name}'s Profile on Wander`});
+    })
 };
 
 module.exports = {
