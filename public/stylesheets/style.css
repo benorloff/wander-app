@@ -2,7 +2,7 @@
 
 :root {
   --color-surface-dark: #121212;
-  --color-gray-dark: #3B3B3B;
+  --color-gray-dark: #1f1f1f;
   --color-gray-light: #CFCFCF;
   --color-primary: #4CAF50;
   --color-green-light: #81C784;
@@ -28,8 +28,16 @@ body {
   background-color: var(--color-surface-dark);
 }
 
-p, h1, h2, h3, h4, h5, h6, span, button, label {
+p, h1, h2, h3, h4, h5, h6, span, button, a, i, label {
   color: var(--color-text-light);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-gray-light);
 }
 
 .brand-logo {

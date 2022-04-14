@@ -10,6 +10,12 @@
     <!-- JavaScript Bundle with Popper -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.tiny.cloud/1/qhyqwn90kpclffjzqfxpqo31n3o0xyvmmfb5j86ejew0b821/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
     <!-- Mapbox GL JS-->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.8.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.0/mapbox-gl.css' rel='stylesheet' />
@@ -22,7 +28,7 @@
             <a class="navbar-brand text-white" href="/">Wander</a>
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="/journals/all" class="nav-link px-2 text-white">Journals</a></li>
+              <li><a href="/posts/all" class="nav-link px-2 text-white">Journals</a></li>
               <li><a href="/countries/all" class="nav-link px-2 text-white">Countries</a></li>
             </ul>
     
