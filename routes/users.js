@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const usersCtrl = require('../controllers/users');
-const countriesCtrl = require('../controllers/countries');
 const postsCtrl = require('../controllers/posts');
 const isLoggedIn = require('../config/auth');
 

@@ -1,6 +1,4 @@
-const axios = require('axios');
 const Country = require('../models/country');
-const User = require('../models/user');
 const Post = require('../models/post');
 const Badge = require('../models/badge');
 
