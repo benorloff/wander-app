@@ -33,7 +33,7 @@ async function create(req, res) {
     req.body.userUri = `/users/${req.user._id}`;
     req.body.isPrivate = !!req.body.isPrivate;
     req.body.countryName = country.name;
-    req.body.countryFlagUri = country.flagImageUri;
+    req.body.countryFlagUri = `/images/flags/${country.isoCodeAlpha2}.png`;
     if (req.body.isPublished === 'Publish') {
         req.body.isPublished = true;
     } else {
@@ -82,7 +82,6 @@ async function deletePost(req, res) {
     console.log(post.user);
     if (!post.user.equals(req.user._id)) return res.redirect(`/posts/${req.params.id}`);
     post.remove();
-    userPosts.save();
     res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`, userPosts});
 };
 
