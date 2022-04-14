@@ -33,8 +33,35 @@
             </ul>
     
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" data-dashlane-rid="6aa9a99453052d14" data-form-type="">
-              <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" data-dashlane-rid="f590dfa098b6bff9" data-form-type="">
+                <input type="search" id="navSearch" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" data-form-type="">
+                <ul id="countries"></ul>
             </form>
+
+            <script>
+                $(document).ready(function () {
+                    $("#navSearch").autocomplete({
+                        source: async function(request, response) {
+                            let data = await fetch(`http://localhost:3000/search?query=${request.term}`)
+                                .then(results => results.json())
+                                .then(results => results.map(result => { 
+                                    return { label: result.name, value: result.name, id: result._id };
+                                }));
+                            response(data);
+                        },
+                        minLength: 2,
+                        select: function(event, ui) {
+                            fetch(`http://localhost:3000/get/${ui.item.id}`)
+                                .then(result => result.json())
+                                .then(result => {
+                                    $("#countries").empty();
+                                    result.countries.forEach(country => {
+                                        $("#countries").append(`<li>${country}</li>`);
+                                    });
+                                });
+                        }
+                    });
+                });
+            </script>
     
             <div class="text-end">
                 <% if (user) { %>
