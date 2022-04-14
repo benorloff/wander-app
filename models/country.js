@@ -10,6 +10,14 @@ const countrySchema = new Schema({
         type: String, 
         required: false
     },
+    longitude: {
+        type: Number,
+        required: true
+    },
+    latitude: {
+        type: Number,
+        required: true
+    },
     isoCodeAlpha2: {
         type: String,
         required: true

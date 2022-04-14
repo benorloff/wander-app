@@ -92,6 +92,7 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
 
 .country-list-result-container img {
   height: 50px;
+  margin-right: 15px;
 }
 
 .country-list-result-info {
@@ -105,11 +106,13 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
 .country-list-result-info h5 {
   flex-grow: 4;
   align-content: center;
+  margin-bottom: 0;
 }
 
 .country-list-result-info button {
   flex-grow: 1;
   align-items: center;
+  margin-left: 10px;
 }
 
 /* Single Country View */

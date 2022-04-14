@@ -1,5 +1,8 @@
 <%- include('../partials/header') %> 
 
+<div id="map" style="width: 100%; height: 300px; margin-bottom: 50px;"></div>
+<%- include('../partials/map') %>
+
 <div class="container">
     <h1>All Countries</h1>
     <% countries.forEach(c => { %>
@@ -7,11 +10,11 @@
             <img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>">
             <div class="country-list-result-info">
                 <h5><%= c.name %></h5>
-                <a href="/countries/<%= c.id %>" class="btn btn-primary">Explore</a>
+                <a href="/countries/<%= c.id %>" class="btn btn-light">Explore</a>
                 <% if (user && c.usersVisited.includes(user._id) ) { %>
-                    <form action="/countries/<%= c.id %>?_method=PUT" method="POST"><input type="submit" value="Remove"class="btn btn-primary"></form>
+                    <form action="/countries/<%= c.id %>?_method=PUT" method="POST"><button type="submit" value="Remove" class="btn btn-danger">Remove</button></form>
                 <% } else { %>
-                    <form action="/countries/<%= c.id %>" method="POST"><input type="submit" value="Add"class="btn btn-primary"></form>
+                    <form action="/countries/<%= c.id %>" method="POST"><button type="submit" value="Add"class="btn btn-primary">Add</button></form>
                 <% } %>
             </div>
         </div>

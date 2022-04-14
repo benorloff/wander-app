@@ -18,6 +18,8 @@ function allCountries(req, res) {
 async function show(req, res) {
     const country = await Country.findById(req.params.id);
     const posts = await Post.find({country: req.params.id}).exec();
+    const lng = await parseFloat(country.longitude);
+    const lat = await parseFloat(country.latitude);
     const options = {
         method: 'GET',
         url: `https://wft-geo-db.p.rapidapi.com/v1/geo/countries/${country.isoCodeAlpha2}`,
@@ -26,21 +28,12 @@ async function show(req, res) {
           'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY
         }
       };
+    
     axios.request(options).then(function (response) {
-        res.render('countries/show', {title: country.name, country, posts, data: response.data.data});
+        res.render('countries/show', {title: country.name, country, lng, lat, posts, data: response.data.data});
     }).catch(function (error) {
         console.error(error);
     });
-    // // Add response data to db
-    // if (country.capital === "") {
-    //     country.capital = response.data.capital;
-    //     country.callingCode = response.data.callingCode;
-    //     country.currencyCodes = response.data.currencyCodes;
-    //     country.flagImageUri = response.data.flagImageUri;
-    //     country.numRegions = response.data.numRegions;
-    //     country.wikiDataId = response.data.wikiDataId;
-    //     country.save();
-    // }
 };
 
 async function addVisitor(req, res) {
