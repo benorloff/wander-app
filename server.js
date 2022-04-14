@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const methodOverride = require('method-override');
+const moment = require('moment');
+moment().format();
 
 // routes
 const indexRouter = require('./routes/index');

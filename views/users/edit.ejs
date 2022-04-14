@@ -5,6 +5,9 @@
     <div style="flex-basis: 15%;"></div>
     <div class="onboard-form-container d-flex flex-column align-items-center justify-content-center px-3 py-3">
         <h1>Update your profile</h1>
+        <div class="profile-avatar">
+            <img src="<%= user.avatar %>" style="margin-top: 0;">
+        </div>
         <form action="/users/<%= user._id %>?_method=PUT" method="POST">
             <div class="row my-2">
                 <div class="col">
@@ -13,7 +16,7 @@
                 </div>
                 <div class="col">
                     <label for="birthdate">Birthdate</label>
-                    <input type="date" class="form-control" id="birthdate" name="birthdate" value="<%= user.birthdate.toLocaleDateString() %>">
+                    <input type="date" class="form-control" id="birthdate" name="birthdate" value="<%= dateFormatted %>">
                 </div>
             </div>
             <div class="row my-2">
@@ -32,7 +35,7 @@
                     <textarea class="form-control" rows="10" id="bio" name="bio"><%= user.bio %></textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Get Started</button>
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
         </form>
     </div>
     <div style="flex-basis: 15%;"></div>

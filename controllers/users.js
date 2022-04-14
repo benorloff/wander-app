@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Country = require('../models/country');
 const Post = require('../models/post');
 const Badge = require('../models/badge');
+const moment = require('moment');
 
 function onboard(req, res) {
     const user = User.findById(req.user._id).exec();
@@ -17,7 +18,7 @@ async function index(req, res) {
 };
 
 async function show(req, res) {
-    const userCountries = await Country.find({usersVisited: req.user._id}).exec();
+    const userCountries = await Country.find({usersVisited: req.user.id}).exec();
     const userPosts = await Post.find({user: req.user._id}).exec();
     const userBadges = await Badge.find({usersCollected: req.params._id}).exec();
     res.render('users/show', {title: 'User Profile', userCountries, userPosts, userBadges, req})
@@ -25,7 +26,8 @@ async function show(req, res) {
 
 async function edit(req, res) {
     const user = await User.findById(req.user._id).exec();
-    res.render('users/edit', {title: 'Edit Your Profile', user});
+    const dateFormatted = moment(user.birthdate).format('YYYY-MM-DD');
+    res.render('users/edit', {title: 'Edit Your Profile', user, dateFormatted});
 };
 
 async function update(req, res) {
