@@ -13,7 +13,7 @@
                 </div>
                 <div class="col">
                     <label for="birthdate">Birthdate</label>
-                    <input type="date" class="form-control" id="birthdate" name="birthdate" value="<%= user.birthdate %>">
+                    <input type="date" class="form-control" id="birthdate" name="birthdate" value="<%= user.birthdate.toLocaleDateString() %>">
                 </div>
             </div>
             <div class="row my-2">
