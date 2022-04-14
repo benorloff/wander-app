@@ -25,13 +25,18 @@
                 <% }); %>
             </div>
         </div>
+        <div class="stats-card badges-collected">
+            <h3>Badges Collected</h3>
+            <div>
+                <% userBadges.forEach(b => { %>
+                    <img src="<%= b.badgeImageUri %>" alt="<%= b.name %>" title="<%= b.name %>">
+                <% }); %>
+            </div>
+        </div>
         <div class="stats-card world-percent">
             <h3>World Percent</h3>
             <span><%= Math.round(userCountries.length / 249 * 100) %>%</span>
 
-        </div>
-        <div class="stats-card badges-collected">
-            <h3>Badges Collected</h3>
         </div>
     </div>
     <h2>Journals</h2>

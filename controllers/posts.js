@@ -1,10 +1,9 @@
 const Post = require('../models/post');
 const Country = require('../models/country');
 
-function index(req, res) {
-    Post.find({user: req.user._id}, function(err, posts) {
-        res.render('users/posts', {title: 'My Posts', posts})
-    })
+async function index(req, res) {
+    const userPosts = await Post.find({user: req.user._id}).exec();
+    res.render('users/posts', {title: 'My Posts', userPosts})
 };
 
 function allPosts(req, res) {
@@ -13,11 +12,10 @@ function allPosts(req, res) {
     })
 };
 
-function show(req, res) {
-    Post.findById(req.params.id)
-    .exec(function(err, post) {
-        res.render('posts/show', {title: post.title, post})
-    })
+async function show(req, res) {
+    const post = await Post.findById(req.params.id).exec();
+    const country = await Country.findById(post.country).exec();
+    res.render('posts/show', {title: post.title, post, country})
 };
 
 function newPost(req, res) {
@@ -80,10 +78,12 @@ async function update(req, res) {
 
 async function deletePost(req, res) {
     const post = await Post.findById(req.params.id);
-    console.log(post.user, req.user._id);
+    const userPosts = await Post.find({user: post.user}).exec();
+    console.log(post.user);
     if (!post.user.equals(req.user._id)) return res.redirect(`/posts/${req.params.id}`);
     post.remove();
-    res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`});
+    userPosts.save();
+    res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`, userPosts});
 };
 
 module.exports = {

@@ -120,7 +120,7 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
 
 /* Single Country View */
 
-.subnavbar img {
+.subnavbar img, .bd-subnavbar img {
   height: 35px;
   margin-right: 10px;
 }
@@ -137,6 +137,9 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
 
 .subnavbar {
   background-color: var(--color-gray-dark);
+  position: sticky;
+  top: 72px;
+  z-index: 1000;
 }
 
 /*-----USER PROFILE-----*/
@@ -183,19 +186,23 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
 }
 
 .flags-collected {
-  flex-basis: 50%;
+  flex-grow: 2;
 }
 
 .flags-collected img {
   height: 35px;
 }
 
-.world-percent {
-  flex-grow: 1;
-}
-
 .badges-collected {
   flex-grow: 2;
+}
+
+.badges-collected img {
+  height: 50px;
+}
+
+.world-percent {
+  flex-grow: 1;
 }
 
 /* User Posts */
@@ -204,6 +211,7 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  margin-bottom: 50px;
 }
 
 .post-card {
@@ -211,3 +219,31 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
   padding: 25px;
   border-radius: 5px;
 }
+
+/*-----POSTS-----*/
+
+/* Single post */
+
+.bd-subnavbar p {
+  margin-bottom: 0;
+}
+
+.post-byline-header {
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.post-byline-info p, .post-byline-info h5  {
+  margin-bottom: 0;
+}
+
+.post-byline-avatar {
+  margin-right: 15px;
+}
+
+.post-byline-avatar img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+

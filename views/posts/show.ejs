@@ -1,11 +1,42 @@
 <%- include('../partials/header') %>
 
+<div class="subnavbar" style="border-bottom: 1px solid var(--color-text-light);">
+    <nav class="container bd-subnavbar py-2" aria-label="Secondary navigation">
+        <div class="container-xxl d-flex align-items-md-center justify-content-between">
+          <div class="d-flex align-items-md-center left">
+            <img src="/images/flags/<%= country.isoCodeAlpha2 %>.png" alt="<%= country.name %>" title="<%= country.name %>">  
+            <p>Published in <a href="/countries/<%= country._id %>"><%= country.name %></a></p>
+          </div>
+          <% if (user && user._id.equals(post.user)) { %>
+            <div class="d-flex align-items-md-center right">
+                <form action="/posts/<%= post._id %>/edit" method="GET"><button class="btn btn-light" style="margin-right: 15px;">Edit</button></form>
+                <form action="/posts/<%= post._id %>?_method=DELETE" method="POST"><button class="btn btn-danger">Delete</button></form>
+            </div>
+          <% } %>
+        </div>
+    </nav>
+</div>
+
 <div class="container">
     <div class="post-container">
+        <header class="post-byline-header">
+            <div class="d-flex post-byline-info">
+                <div class="post-byline-avatar">
+                    <a href="/users/<%= post.user %>">
+                        <img src="<%= post.userAvatar %>" title="<%= post.userName %>">
+                    </a>
+                </div>
+                <div>
+                    <h5><%= post.userName %></h5>
+                    <p><%= post.createdAt.toDateString(); %> </p>
+                </div>
+            </div>
+            <div class="d-flex post-byline-actions">
+
+            </div>
+        </header>
         <h1><%= post.title %></h1>
         <p><%= post.content %></p>
-        <form action="/posts/<%= post._id %>/edit" method="GET"><button class="btn btn-primary" type="submit">Edit</button></form>
-        <form action="/posts/<%= post._id %>?_method=DELETE" method="GET"><button class="btn btn-primary" type="submit">Delete</button></form>
     </div>
 </div>
 

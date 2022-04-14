@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+    <h1>My Journals</h1>
+    <div class="profile-posts">
+        <% if (userPosts.length > 0) { %>
+            <% userPosts.forEach(p => { %>
+                <div class="post-card">
+                    <h3><a href="/posts/<%= p._id %>"><%= p.title %></a></h3>
+                    <p><%= p.content %></p>
+                </div>
+            <% }); %>
+        <% } else { %>
+             <p>No journal entries yet. <% if (user && user._id === req.params.id) { %><a href="/posts/new">Create a new journal.</a><% } %></p>
+        <% } %>
+    </div>
+</div>
+
+
+<%- include('../partials/footer') %>
