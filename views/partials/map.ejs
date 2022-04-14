@@ -1,11 +1,17 @@
 <script>
+    const mapLng = document.querySelector('#mapLng').innerText;
+    const mapLat = document.querySelector('#mapLat').innerText;
+    const isoCodes = document.querySelector('#isoCodes').innerText.toUpperCase();
+    const zoom = document.querySelector('#zoom').innerText;
+
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmVub3Jsb2ZmIiwiYSI6ImNsMXR0aXE3cjBpbDMzaXF2bGdkcHJ6cHAifQ.Ju341IcUlEvqkZXhSkY1Aw';
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/benorloff/cl1ttpomo000m14o640ovilw5',
-        center: [0, 0],
-        zoom: 3
+        center: [mapLng, mapLat],
+        zoom: zoom
     });
+
 
     map.on('load', function() {
       map.addLayer(
@@ -18,8 +24,8 @@
           'source-layer': 'country_boundaries',
           type: 'fill',
           paint: {
-            'fill-color': '#d2361e',
-            'fill-opacity': 0.4,
+            'fill-color': '#4CAF50',
+            'fill-opacity': 0.3,
           },
         },
         'country-label'
@@ -28,7 +34,7 @@
       map.setFilter('country-boundaries', [
         "in",
         "iso_3166_1_alpha_3",
-        'AFG'
+        isoCodes
       ]);
     });
 </script>

@@ -18,13 +18,14 @@
             </div>
         </div>
     </div>
+    <p style="margin-bottom: 50px;"><%= user.bio %></p>
     <h2>Stats</h2>
     <div class="profile-stats">
         <div class="stats-card flags-collected">
             <h3>Flags Collected <small class="text-muted">(<%= userCountries.length %> of 249)</small></h3>
             <div>
                 <% userCountries.forEach(c => { %>
-                    <img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>" title="<%= c.name %>">
+                    <a href="/countries/<%= c._id %>"><img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>" data-toggle="tooltip" data-placement="top" title="<%= c.name %>"></a>
                 <% }); %>
             </div>
         </div>

@@ -1,7 +1,18 @@
 <%- include('../partials/header') %>
 
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+    });
+</script>
+
 <div class="container">
-    <h1>New Journal</h1>
+    <h1 class="my-4">New Journal</h1>
     <form action="/posts" method="POST">
         <div class="row">
             <div class="col">
@@ -27,14 +38,14 @@
           <label for="content" class="form-label">Content</label>
           <textarea name="content" required class="form-control" rows="10" id="form-field-content" autocomplete="off"></textarea>
         </div>
-        <div class="form-check form-switch">
+        <div class="form-check form-switch my-4">
             <input name="isPrivate" class="form-check-input" type="checkbox" role="switch" id="privacy-toggle">
             <label class="form-check-label" for="privacy-toggle">Make it private?</label>
         </div>
         <input type="hidden" name="postType" value="journal">
-        <div style="display: flex;">
-            <input type="submit" name="isPublished" value="Save Draft" class="btn btn-outline-primary">
-            <input type="submit" name="isPublished" value="Publish" class="btn btn-primary">
+        <div class="my-4" style="display: flex;">
+            <input type="submit" name="isPublished" value="Save Draft" class="btn btn-outline-primary mr-2">
+            <input type="submit" name="isPublished" value="Publish" class="btn btn-primary mx-2">
         </div>
     </form>
 </div>

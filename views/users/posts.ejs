@@ -1,13 +1,27 @@
 <%- include('../partials/header') %>
 
 <div class="container">
-    <h1>My Journals</h1>
+    <h1 class="py-5">My Journals</h2>
     <div class="profile-posts">
         <% if (userPosts.length > 0) { %>
             <% userPosts.forEach(p => { %>
-                <div class="post-card">
-                    <h3><a href="/posts/<%= p._id %>"><%= p.title %></a></h3>
-                    <p><%= p.content %></p>
+                <div class="d-flex flex-column post-card">
+                    <div class="d-flex mb-2 justify-content-between post-card-header">
+                        <div class="d-flex flag">
+                            <img src="<%= p.countryFlagUri %>">
+                            <h4><a href="/posts/<%= p._id %>"><% if (p.title.length < 30) { %>
+                                <%= p.title %></a></h4>
+                            <% } else { %>
+                                <%= p.title.substring(0,30) %>...</a></h4>   
+                            <% } %>
+                        </div>
+                        <div class="d-flex justify-content-end details">
+                            <img src="<%= p.userAvatar %>" class="user-nav-img">
+                        </div>
+                    </div>
+                    <div class="post-card-excerpt">
+                        <p><%= p.content.substring(0, 100) %>...</p>
+                    </div>
                 </div>
             <% }); %>
         <% } else { %>

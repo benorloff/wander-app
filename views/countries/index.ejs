@@ -1,0 +1,85 @@
+<%- include('../partials/header') %>
+
+<div id='map' style='width: 100%; height: 300px; margin-bottom: 50px;'></div>
+<div style="display:none;">
+  <span id="mapLat">0</span>
+  <span id="mapLng">0</span>
+  <span id="isoCodes"></span>
+</div>
+<%- include('../partials/map') %>
+
+<div class="container">
+    <div class="d-flex flex-row justify-content-between align-items-center mb-5">
+        <div class="profile-avatar p-2">
+            <img src="<%= user.avatar %>" alt="Avatar">
+        </div>
+        <div class="d-flex justify-content-between align-items-end" style="flex-grow: 2;">
+            <div class="p-2">
+                <h1 class="mb-0"><%= user.name %></h1>
+                <p class="mb-0"><small>Joined: <%= user.createdAt.toDateString() %></small></p>
+            </div>
+            <div class="d-flex p-2">
+                <form action="/posts/new" method="GET"><button type="submit" value="New Journal" class="btn btn-primary">New Journal</button></form>
+                <form action="/users/<%= user._id %>/edit" method="GET"><button type="submit" class="btn btn-primary">Edit Profile</button></form>
+            </div>
+        </div>
+    </div>
+    <p style="margin-bottom: 50px;"><%= user.bio %></p>
+    <h2>Stats</h2>
+    <div class="profile-stats">
+        <div class="stats-card flags-collected">
+            <h3>Flags Collected <small class="text-muted">(<%= userCountries.length %> of 249)</small></h3>
+            <div>
+                <% userCountries.forEach(c => { %>
+                    <a href="/countries/<%= c._id %>"><img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>" data-toggle="tooltip" data-placement="top" title="<%= c.name %>"></a>
+                <% }); %>
+            </div>
+        </div>
+        <div class="stats-card badges-collected">
+            <h3>Badges Collected</h3>
+            <div>
+                <% userBadges.forEach(b => { %>
+                    <img src="<%= b.badgeImageUri %>" alt="<%= b.name %>" title="<%= b.name %>">
+                <% }); %>
+            </div>
+        </div>
+        <div class="stats-card world-percent">
+            <h3>World Percent</h3>
+            <span><%= Math.round(userCountries.length / 249 * 100) %>%</span>
+
+        </div>
+    </div>
+    <h2>Journals</h2>
+    <div class="profile-posts">
+        <% if (userPosts.length > 0) { %>
+            <% userPosts.forEach(p => { %>
+                <div class="d-flex flex-column post-card">
+                    <div class="d-flex mb-2 justify-content-between post-card-header">
+                        <div class="d-flex flag">
+                            <img src="<%= p.countryFlagUri %>">
+                            <h4><a href="/posts/<%= p._id %>"><% if (p.title.length < 30) { %>
+                                <%= p.title %></a></h4>
+                            <% } else { %>
+                                <%= p.title.substring(0,30) %>...</a></h4>   
+                            <% } %>
+                        </div>
+                        <div class="d-flex justify-content-end details">
+                            <img src="<%= p.userAvatar %>" class="user-nav-img">
+                        </div>
+                    </div>
+                    <div class="post-card-excerpt">
+                        <p><%= p.content.substring(0, 100) %>...</p>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+             <p>No journal entries yet. <% if (user && user._id === req.params.id) { %><a href="/posts/new">Create a new journal.</a><% } %></p>
+        <% } %>
+    </div>
+
+</div>
+
+
+
+
+<%- include('../partials/footer') %>

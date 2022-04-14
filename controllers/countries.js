@@ -5,8 +5,8 @@ const Post = require('../models/post');
 const Badge = require('../models/badge');
 
 async function index(req, res) {
-    const userCountries = await Country.find({usersVisited: req.user._id}).exec();
-    res.render('users/countries', {title: 'My Countries', userCountries})
+    const userCountries = await Country.find({usersVisited: req.user.id}).exec();
+    res.render('countries/index', {title: 'My Countries', userCountries})
 };
 
 function allCountries(req, res) {

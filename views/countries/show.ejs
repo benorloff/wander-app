@@ -15,6 +15,12 @@
 </div>
 
 <div id='map' style='width: 100%; height: 300px; margin-bottom: 50px;'></div>
+<div style="display:none;">
+  <span id="mapLat"><%= country.latitude %></span>
+  <span id="mapLng"><%= country.longitude %></span>
+  <span id="isoCodes"><%= country.isoCodeAlpha3 %></span>
+  <span id="zoom">3</span>
+</div>
 <%- include('../partials/map') %>
 
 <div class="container">

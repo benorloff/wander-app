@@ -1,0 +1,49 @@
+<%- include('../partials/header') %>
+
+<div id='map' style='width: 100%; height: 300px; z-index: -1'></div>
+<div style="display:none;">
+  <span id="mapLat">0</span>
+  <span id="mapLng">0</span>
+  <span id="isoCodes"></span>
+  <span id="zoom">1</span>
+</div>
+<%- include('../partials/map') %>
+
+<div class="container">
+    <div class="d-flex flex-row justify-content-between align-items-center mb-5">
+        <div class="profile-avatar p-2">
+            <img src="<%= user.avatar %>" alt="Avatar">
+        </div>
+        <div class="d-flex justify-content-between align-items-end" style="flex-grow: 2;">
+            <div class="p-2">
+                <h1 class="mb-0"><%= user.name %></h1>
+                <p class="mb-0"><small>Joined: <%= user.createdAt.toDateString() %></small></p>
+            </div>
+            <div class="d-flex p-2">
+                <form action="/posts/new" method="GET"><button type="submit" value="New Journal" class="btn btn-primary">New Journal</button></form>
+                <form action="/users/<%= user._id %>/edit" method="GET"><button type="submit" class="btn btn-primary">Edit Profile</button></form>
+            </div>
+        </div>
+    </div>
+    <p style="margin-bottom: 50px;"><%= user.bio %></p>
+    <h1>My Countries</h1>
+    <% userCountries.forEach(c => { %>
+        <div class="country-list-result-container">
+            <img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>">
+            <div class="country-list-result-info">
+                <h5><%= c.name %></h5>
+                <a href="/countries/<%= c.id %>" class="btn btn-light">Explore</a>
+                <% if (user && c.usersVisited.includes(user._id) ) { %>
+                    <form action="/countries/<%= c.id %>?_method=PUT" method="POST"><button type="submit" value="Remove" class="btn btn-danger">Remove</button></form>
+                <% } else { %>
+                    <form action="/countries/<%= c.id %>" method="POST"><button type="submit" value="Add"class="btn btn-primary">Add</button></form>
+                <% } %>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+
+
+
+<%- include('../partials/footer') %>
