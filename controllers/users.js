@@ -23,8 +23,9 @@ async function show(req, res) {
     res.render('users/show', {title: 'User Profile', userCountries, userPosts, userBadges, req})
 };
 
-function edit(req, res) {
-    res.send('This is the user edit controller function')
+async function edit(req, res) {
+    const user = await User.findById(req.user._id).exec();
+    res.render('users/edit', {title: 'Edit Your Profile', user});
 };
 
 async function update(req, res) {
