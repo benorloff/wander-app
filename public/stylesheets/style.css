@@ -76,6 +76,14 @@ p, h1, h2, h3, h4, h5, h6, span, button, label {
   justify-content: flex-end;
 }
 
+/*-----HOME-----*/
+
+.home-hero {
+  background-image: url('/images/wander-home-hero-bg.png');
+  background-size: cover;
+  background-position: center;
+}
+
 /*-----ONBOARD------*/
 
 /* .onboard-container {

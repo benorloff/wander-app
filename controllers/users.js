@@ -4,11 +4,11 @@ const Post = require('../models/post');
 const Badge = require('../models/badge');
 
 function onboard(req, res) {
-    const user = User.findById(req.user._id);
-    console.log(!user.hometown);
-    if (!user.hometown) {
+    const user = User.findById(req.user._id).exec();
+    console.log(req.user.hometown === undefined);
+    if (req.user.hometown === undefined) {
         res.render('users/onboard', {title: 'Complete your Wander profile'})
-    } else {res.redirect(`/users/${user._id}`)}
+    } else {res.redirect(`/users/${req.user._id}`)}
 };
 
 async function index(req, res) {
@@ -19,7 +19,7 @@ async function index(req, res) {
 async function show(req, res) {
     const userCountries = await Country.find({usersVisited: req.user._id}).exec();
     const userPosts = await Post.find({user: req.user._id}).exec();
-    const userBadges = await Badge.find({usersCollected: req.params.id}).exec();
+    const userBadges = await Badge.find({usersCollected: req.params._id}).exec();
     res.render('users/show', {title: 'User Profile', userCountries, userPosts, userBadges, req})
 };
 
@@ -27,8 +27,17 @@ function edit(req, res) {
     res.send('This is the user edit controller function')
 };
 
-function update(req, res) {
-    res.send('This is the user update controller function')
+async function update(req, res) {
+    const user = await User.findOne({_id: req.user._id});
+    user.name = req.body.name;
+    user.birthdate = req.body.birthdate;
+    user.hometown = req.body.hometown;
+    user.bio = req.body.bio;
+    user.save().then(function() {
+        res.redirect(`/users/${user._id}`);
+    }).catch(function(err) {
+        return next(err);
+    })
 };
 
 function deleteUser(req, res) {
