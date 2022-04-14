@@ -20,20 +20,7 @@ async function show(req, res) {
     const posts = await Post.find({country: req.params.id}).exec();
     const lng = await parseFloat(country.longitude);
     const lat = await parseFloat(country.latitude);
-    const options = {
-        method: 'GET',
-        url: `https://wft-geo-db.p.rapidapi.com/v1/geo/countries/${country.isoCodeAlpha2}`,
-        headers: {
-          'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST,
-          'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY
-        }
-      };
-    
-    axios.request(options).then(function (response) {
-        res.render('countries/show', {title: country.name, country, lng, lat, posts, data: response.data.data});
-    }).catch(function (error) {
-        console.error(error);
-    });
+    res.render('countries/show', {title: country.name, country, lng, lat, posts});
 };
 
 async function addVisitor(req, res) {
