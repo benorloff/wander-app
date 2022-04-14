@@ -1,10 +1,17 @@
 // load the env consts
 require('dotenv').config();
 
+const { MongoClient, ObjectID, ObjectId } = require("mongodb");
 const express = require('express');
+const Cors = require("cors");
+const BodyParser = require("body-parser");
+const { request } = require("express");
 const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+
+// MongoDB Atlas Search
+const client = new MongoClient(process.env.DATABASE_URL);
 
 // session middleware
 const session = require('express-session');
@@ -38,6 +45,54 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
+
+// mount MongoDB Atlas Search
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: true }));
+app.use(Cors());
+
+var collection;
+
+app.get("/search", async (request, response) => {
+  try {
+    let result = await collection.aggregate([
+      {
+        "$search": {
+          "autocomplete": {
+            "query": `${request.query.query}`,
+            "path": "name",
+            "fuzzy": {
+              "maxEdits": 3,
+              "prefixLength": 3
+            }
+          }
+        }
+      }
+    ]).toArray();
+    response.send(result);
+  } catch (e) {
+    response.status(500).send({ message: e.message });
+  }
+});
+
+app.get("/get/:id", async (request, response) => {
+  try {
+    let result = await collection.findOne({ "_id": ObjectId(request.params.id) });
+    response.send(result);
+  } catch (e) {
+    response.status(500).send({ message: e.message })
+  }
+});
+
+app.listen("3000", async () => {
+    try {
+        await client.connect();
+        collection = client.db("WanderAppDb").collection("countries");
+    } catch (e) {
+        console.error(e);
+    }
+});
+
 // mount the session middleware
 app.use(session({
   secret: process.env.SECRET,
