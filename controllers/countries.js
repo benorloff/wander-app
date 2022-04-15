@@ -14,11 +14,19 @@ function allCountries(req, res) {
 };
 
 async function show(req, res) {
-    const country = await Country.findById(req.params.id);
-    const posts = await Post.find({country: req.params.id}).exec();
-    const lng = await parseFloat(country.longitude);
-    const lat = await parseFloat(country.latitude);
-    res.render('countries/show', {title: country.name, country, lng, lat, posts});
+    try {
+        const country = await Country.findById(req.params.id);
+        console.log(country)
+        const posts = await Post.find({country: req.params.id}).exec();
+        console.log(posts)
+        const lng = parseFloat(country.longitude);
+        console.log(lng)
+        const lat = parseFloat(country.latitude);
+        console.log(lat)
+        res.render('countries/show', {title: country.name, country, lng, lat, posts}); 
+    } catch (err) {
+        res.send(err);
+    }
 };
 
 async function addVisitor(req, res) {
