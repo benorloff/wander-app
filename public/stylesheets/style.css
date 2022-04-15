@@ -184,7 +184,7 @@ a:hover {
 .subnavbar {
   background-color: var(--color-gray-dark);
   position: sticky;
-  top: 72px;
+  top: 66px;
   z-index: 1000;
 }
 
