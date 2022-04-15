@@ -4,7 +4,7 @@
 
 Wander is a travel journal app that helps you keep track of your travel memories by recording countries you've visited and logging journal entries for your journeys. You can choose to keep your journal entries private or share them with the Wander community. Easily view all of your travels in one place and collect badges for your travel milestones along the way.
 
-[Launch the app](https://wander-travel-journal-app.herokuapp.com/)
+[Click here to launch the app!](https://wander-travel-journal-app.herokuapp.com/)
 
 ## Project Planning
 
