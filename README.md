@@ -28,27 +28,27 @@ I used Trello, Figma, and Lucidchart to assist with project ideation, planning, 
 
 ## Screenshots
 
-![Home](/images/screenshots/home.png)
+![Home](/public/images/screenshots/home.png)
 
 Landing page
 
-![Profile](/images/screenshots/profile.png)
+![Profile](/public/images/screenshots/profile.png)
 
 User profile page
 
-![Edit Profile](/images/screenshots/edit-profile.png)
+![Edit Profile](/public/images/screenshots/edit-profile.png)
 
 User profile page
 
-![All Countries](/images/screenshots/countries.png)
+![All Countries](/public/images/screenshots/countries.png)
 
 All countries page
 
-![Single Country](/images/screenshots/country.png)
+![Single Country](/public/images/screenshots/country.png)
 
 Single country page
 
-![New Journal](/images/screenshots/new-journal.png)
+![New Journal](/public/images/screenshots/new-journal.png)
 
 New journal page
 
