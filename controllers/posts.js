@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Country = require('../models/country');
+const Badge = require('../models/badge');
 
 async function index(req, res) {
     const userPosts = await Post.find({user: req.user._id}).exec();
@@ -45,6 +46,9 @@ async function create(req, res) {
                 console.log(err);
                 return res.redirect('/posts/new');
             }
+            const usersPosts = Post.find({user: req.user._id}).exec();
+            const usersPostCount = usersPosts.length;
+            updateBadges(req, usersPostCount);
             res.redirect(`/users/${req.user._id}`);
         })
     } catch (err) {
@@ -82,9 +86,30 @@ async function deletePost(req, res) {
     if (!post.user.equals(req.user._id)) return res.redirect(`/posts/${req.params.id}`);
     post.remove().then(function() {
         const userPosts = Post.find({user: post.user}).exec();
+        const usersPostCount = userPosts.length;
+        updateBadges(req, usersPostCount);
         res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`, userPosts});
     });
 };
+
+async function updateBadges(req, usersPostCount) {
+    console.log('hit updateBadges');
+    const journalBadges = await Badge.find({name: {$regex: /^journals/}}).exec();
+    journalBadges.forEach(b => {
+        console.log(b);
+        // Remove user from badge if their post count is below the badge's value
+        if (usersPostCount < b.numValue && b.usersCollected.includes(req.user._id) === true) {
+            let userIdx = b.usersCollected.indexOf(req.user._id);
+            b.usersCollected.splice(userIdx, 1);
+            b.save();
+            console.log(`user has been removed from ${b.name} badge`)
+        } else if (usersPostCount >= b.numValue && b.usersCollected.includes(req.user._id) === false) {
+            b.usersCollected.push(req.user._id);
+            b.save();
+            console.log(`user has been added to ${b.name} badge`)
+        }
+    })
+}
 
 module.exports = {
     index,

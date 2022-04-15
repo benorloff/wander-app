@@ -20,8 +20,9 @@ async function index(req, res) {
 async function show(req, res) {
     const userCountries = await Country.find({usersVisited: req.user._id}).exec();
     const userPosts = await Post.find({user: req.user._id}).exec();
-    const userBadges = await Badge.find({usersCollected: req.params._id}).exec();
-    res.render('users/show', {title: 'User Profile', userCountries, userPosts, userBadges, req})
+    const userBadges = await Badge.find({usersCollected: req.params.id}).exec();
+    console.log(userBadges);
+    res.render('users/show', {title: 'User Profile', userCountries, userPosts, userBadges})
 };
 
 async function countries(req, res) {

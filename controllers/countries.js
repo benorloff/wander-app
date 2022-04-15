@@ -28,7 +28,6 @@ async function addVisitor(req, res) {
         country.save();
         const usersCountries = await Country.find({usersVisited: req.user._id}).exec();
         const usersCountryCount = await usersCountries.length;
-        console.log(`${usersCountryCount} <- user's country count`);
         updateBadges(req, usersCountryCount);
         res.redirect('/countries/all');
     } catch (err) {
@@ -41,7 +40,6 @@ async function removeVisitor(req, res) {
         const country = await Country.findById(req.params.id);
         const usersCountries = await Country.find({usersVisited: req.user._id}).exec();
         const usersCountryCount = await usersCountries.length;
-        console.log(usersCountryCount);
         const userIdx = await country.usersVisited.indexOf(req.user._id);
         if (userIdx > -1) {
             country.usersVisited.splice(userIdx, 1);
@@ -55,20 +53,16 @@ async function removeVisitor(req, res) {
 }
 
 async function updateBadges(req, usersCountryCount) {
-    console.log('hit updateBadges');
     const countryBadges = await Badge.find({name: {$regex: /^countries/}}).exec();
     countryBadges.forEach(b => {
-        console.log(b);
         // Remove user from badge if their country count is below the badge's value
         if (usersCountryCount < b.numValue && b.usersCollected.includes(req.user._id) === true) {
             let userIdx = b.usersCollected.indexOf(req.user._id);
             b.usersCollected.splice(userIdx, 1);
             b.save();
-            console.log(`user has been removed from ${b.name} badge`)
         } else if (usersCountryCount >= b.numValue && b.usersCollected.includes(req.user._id) === false) {
             b.usersCollected.push(req.user._id);
             b.save();
-            console.log(`user has been added to ${b.name} badge`)
         }
     })
 }
