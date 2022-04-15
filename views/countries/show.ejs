@@ -39,28 +39,62 @@
 
   <% if (user) { %>
     <h2>My Journals</h2>
-    <div class="my-posts">
-      <% posts.forEach(p => { %>
-        <% if (p.user === user.id) { %>
-          <div class="post-card">
-            <h4><%= p.title %></h4>
-            <p><%= p.content %></p>
-          </div>
+    <div class="profile-posts">
+      <% if (posts.length > 0) { %>
+          <% posts.forEach(p => { %>
+              <div class="d-flex flex-column post-card">
+                  <div class="d-flex mb-2 justify-content-between post-card-header">
+                      <div class="d-flex flag">
+                          <img src="<%= p.countryFlagUri %>">
+                          <h4><a href="/posts/<%= p._id %>"><% if (p.title.length < 30) { %>
+                              <%= p.title %></a></h4>
+                          <% } else { %>
+                              <%= p.title.substring(0,30) %>...</a></h4>   
+                          <% } %>
+                      </div>
+                      <div class="d-flex justify-content-end details">
+                          <img src="<%= p.userAvatar %>" class="user-nav-img">
+                      </div>
+                  </div>
+                  <div class="post-card-excerpt">
+                      <p><%= p.content.substring(0, 100) %>...</p>
+                  </div>
+              </div>
+          <% }); %>
+          <% } else { %>
+              <p>No journal entries yet. <% if (user && user._id === req.params.id) { %><a href="/posts/new">Create a new journal.</a><% } %></p>
         <% } %>
-      <% }) %>
-    </div>
+      </div>
   <% } %>
   
   <h2>Community Journals</h2>
   <div class="community-posts">
-    <% posts.forEach(p => { %>
-      <% if (p.isPrivate === false) { %>
-        <div class="post-card">
-          <h4><%= p.title %></h4>
-          <p><%= p.content %></p>
-        </div>
-      <% } %> 
-    <% }); %>
+    <% if (posts.length > 0) { %>
+      <% posts.forEach(p => { %>
+          <% if (p.isPrivate === false) { %>
+            <div class="d-flex flex-column post-card">
+                <div class="d-flex mb-2 justify-content-between post-card-header">
+                    <div class="d-flex flag">
+                        <img src="<%= p.countryFlagUri %>">
+                        <h4><a href="/posts/<%= p._id %>"><% if (p.title.length < 30) { %>
+                            <%= p.title %></a></h4>
+                        <% } else { %>
+                            <%= p.title.substring(0,30) %>...</a></h4>   
+                        <% } %>
+                    </div>
+                    <div class="d-flex justify-content-end details">
+                        <img src="<%= p.userAvatar %>" class="user-nav-img">
+                    </div>
+                </div>
+                <div class="post-card-excerpt">
+                    <p><%= p.content.substring(0, 100) %>...</p>
+                </div>
+            </div>
+          <% } else { %>
+              <p>No journal entries yet. <% if (user && user._id === req.params.id) { %><a href="/posts/new">Create a new journal.</a><% } %></p>
+          <% } %>
+      <% }); %>
+    <% }; %>
   </div>
 </div>
 
