@@ -23,7 +23,7 @@ async function show(req, res) {
         console.log(lng)
         const lat = parseFloat(country.latitude);
         console.log(lat)
-        res.render('countries/show', {title: country.name, country, lng, lat, posts}); 
+        res.render('countries/show', {title: country.name, country, lng, lat, posts, req}); 
     } catch (err) {
         res.send(err);
     }
