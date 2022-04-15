@@ -1,12 +1,11 @@
 const router = require('express').Router();
 const passport = require('passport');
+const indexCtrl = require('../controllers/index');
 const usersCtrl = require('../controllers/users');
 const isLoggedIn = require('../config/auth');
 
 // The root route renders our only view
-router.get('/', function(req, res) {
-  res.render('home', { title: 'Wander App'});
-});
+router.get('/', indexCtrl.index);
 
 // The user onboarding route
 router.get('/onboard', isLoggedIn, usersCtrl.onboard)

@@ -1,10 +1,10 @@
 <%- include('partials/header') %>
 
 <div class="px-4 py-5 mb-5 text-center home-hero">
-    <img class="d-block mx-auto mb-4" src="/images/favicon.ico" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold">Centered hero</h1>
+    <img class="d-block mx-auto mb-4" src="/images/wander-icon.png" alt="" width="72" height="72">
+    <h1 class="display-5 fw-bold">Remember every journey.</h1>
     <div class="col-lg-6 my-5 mx-auto">
-      <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+      <p class="lead mb-4">It's hard to keep track of every place you've ever been. With Wander, you can keep track of your travels and revisit them over and over again. Whether you use Wander just for you or to stir up some healthy competition with friends, we can't wait to see where you go next.</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <% if (user) { %>
           <a href="/users/<%= user._id %>" class="btn btn-primary btn-lg px-4 gap-3" role="button">My Profile</a>
@@ -16,74 +16,73 @@
     </div>
 </div>
 <div class="container px-4 py-5" id="featured-3">
-    <h2 class="pb-2 border-bottom">Columns with icons</h2>
+    <h2 class="pb-2 border-bottom">What can you do with Wander?</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
       <div class="feature col">
-        <div class="feature-icon bg-primary bg-gradient">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg>
-        </div>
-        <h2>Featured title</h2>
+        <i class="fa-solid fa-marker fa-2xl mb-5"></i>
+        <h3>Write your story</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-        <a href="#" class="icon-link">
-          Call to action
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+        <a href="/posts/new" class="icon-link">
+          Create a journal <i class="fa-solid fa-circle-arrow-right fa-lg"></i>
         </a>
       </div>
       <div class="feature col">
-        <div class="feature-icon bg-primary bg-gradient">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
-        </div>
-        <h2>Featured title</h2>
+        <i class="fa-solid fa-question fa-2xl mb-5"></i>
+        <h3>Ask questions</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-        <a href="#" class="icon-link">
-          Call to action
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+        <a href="/countries/all" class="icon-link">
+          Post your question <i class="fa-solid fa-circle-arrow-right fa-lg"></i>
         </a>
       </div>
       <div class="feature col">
-        <div class="feature-icon bg-primary bg-gradient">
-            <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
-        </div>
-        <h2>Featured title</h2>
+        <i class="fa-solid fa-certificate fa-2xl mb-5"></i>
+        <h3>Collect badges</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-        <a href="#" class="icon-link">
-          Call to action
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+        <a href="/countries/all" class="icon-link">
+          Add a country <i class="fa-solid fa-circle-arrow-right fa-lg"></i>
         </a>
       </div>
     </div>
 </div>
-<div class="bg-light px-4 py-5">
-    <div class="container">
-        <h2 class="pb-2 border-bottom">Recent journal entries</h2>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-        </div>
+<div class="container">
+  <h1 class="py-5">Wander Journals</h2>
+    <div class="profile-posts">
+        <% if (posts.length > 0) { %>
+            <% posts.forEach(p => { %>
+                <% if (p.isPrivate === false) { %>
+                    <div class="d-flex flex-column post-card">
+                        <div class="d-flex mb-2 justify-content-between post-card-header">
+                            <div class="d-flex flag">
+                                <img src="<%= p.countryFlagUri %>">
+                                <h4><a href="/posts/<%= p._id %>"><% if (p.title.length < 30) { %>
+                                    <%= p.title %></a></h4>
+                                <% } else { %>
+                                    <%= p.title.substring(0,30) %>...</a></h4>   
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="post-card-excerpt">
+                            <p><%= p.content.substring(0, 200) %>...</p>
+                        </div>
+                        <div class="d-flex">
+                            <div class="d-flex align-items-center w-50">
+                                <a href="/users/<%= p.user %>"><img src="<%= p.userAvatar %>" class="user-nav-img"></a>
+                                <a href="/users/<%= p.user %>"><p class="mb-0 mx-3"><strong><%= p.userName %></strong></p></a>
+                                <p class="mb-0 mx-2"data-toggle="tooltip" data-placement="top" title="Published"><small><%= p.createdAt.toDateString() %></small></p>
+                                <i class="fa-solid fa-globe mx-2" data-toggle="tooltip" data-placement="top" title="Public"></i>
+                            </div>
+                            <div class="d-flex justify-content-end w-50">
+                                <form action="/posts/<%= p._id %>" method="GET"><button type="submit" class="btn btn-primary">Read</button></form>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% }); %>
+        <% } else { %>
+             <p>No journal entries yet. <% if (user && user._id === req.params.id) { %><a href="/posts/new">Create a new journal.</a><% } %></p>
+        <% } %>
     </div>
+  </div>
 </div>
 
 <%- include('partials/footer') %>

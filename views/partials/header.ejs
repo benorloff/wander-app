@@ -11,6 +11,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.tiny.cloud/1/qhyqwn90kpclffjzqfxpqo31n3o0xyvmmfb5j86ejew0b821/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
     <script>
         $(function () {
         $('[data-toggle="tooltip"]').tooltip()
@@ -24,35 +25,45 @@
 <body>
     <header class="p-3 bg-dark text-white sticky-top">
         <div class="container">
-          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a class="navbar-brand text-white" href="/">Wander</a>
-    
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="/posts/all" class="nav-link px-2 text-white">Journals</a></li>
-              <li><a href="/countries/all" class="nav-link px-2 text-white">Countries</a></li>
-            </ul>
-    
-            <div class="text-end">
-                <% if (user) { %>
-                    <div class="dropdown text-end">
-                        <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUserAvatar" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="<%= user.avatar %>" id="userNavImg" class="user-nav-img">
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="userMenuButton">
-                            <li class="dropdown-item-text">Signed in as <strong><%= user.name %></strong></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/users/<%= user.id %>">Your profile</a></li>
-                            <li><a class="dropdown-item" href="/users/<%= user.id %>/posts">Your journals</a></li>
-                            <li><a class="dropdown-item" href="/users/<%= user.id %>/countries">Your countries</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        </ul>
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/wander-logo.png" height="40px">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa-solid fa-bars" style="color: white;"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav mr-auto">
+                        <div class="nav-item">
+                            <a href="/posts/all" class="nav-link px-2 text-white">Journals</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="/countries/all" class="nav-link px-2 text-white">Countries</a>
+                        </div>
                     </div>
-                <% } else { %>
-                    <a href="/auth/google" class="btn btn-outline-light" role="button">Log In</a>
-                    <a href="/auth/google" class="btn btn-primary" role="button">Sign Up</a>
-                <% } %>
-            </div>
-          </div>
+                </div>
+                <div class="text-end">
+                    <% if (user) { %>
+                        <div class="dropdown text-end">
+                            <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUserAvatar" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="<%= user.avatar %>" id="userNavImg" class="user-nav-img">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="userMenuButton">
+                                <li class="dropdown-item-text">Signed in as <strong><%= user.name %></strong></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/users/<%= user.id %>">Your profile</a></li>
+                                <li><a class="dropdown-item" href="/users/<%= user.id %>/posts">Your journals</a></li>
+                                <li><a class="dropdown-item" href="/users/<%= user.id %>/countries">Your countries</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    <% } else { %>
+                        <a href="/auth/google" class="btn btn-outline-light" role="button">Log In</a>
+                        <a href="/auth/google" class="btn btn-primary" role="button">Sign Up</a>
+                    <% } %>
+                </div>
+            </nav>
         </div>
     </header> 
