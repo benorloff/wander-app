@@ -73,3 +73,13 @@ To add a country, navigate to the "Countries" page and click "Add" for any count
 Once you've added a country, you can create a Journal for your travels by clicking the "New Journal" button on your Profile page.
 
 To logout, simply click the "Logout" button in the dropdown menu that appears in the top right corner of the app.
+
+## Next Steps
+
+Add ability to post questions in country pages. 
+
+Add comment functionality for public journal entries.
+
+Expand Mapbox GL JS API functionality.
+
+Further improve the UI.
