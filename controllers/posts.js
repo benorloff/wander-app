@@ -40,7 +40,7 @@ async function create(req, res) {
         req.body.isPublished = false;
     };
     try {
-        Post.create(req.body, function(err, post) {
+        Post.create(req.body).then(function(err, post) {
             if (err) {
                 console.log(err);
                 return res.redirect('/posts/new');
