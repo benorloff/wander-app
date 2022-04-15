@@ -78,11 +78,12 @@ async function update(req, res) {
 
 async function deletePost(req, res) {
     const post = await Post.findById(req.params.id);
-    const userPosts = await Post.find({user: post.user}).exec();
     console.log(post.user);
     if (!post.user.equals(req.user._id)) return res.redirect(`/posts/${req.params.id}`);
-    post.remove();
-    res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`, userPosts});
+    post.remove().then(function() {
+        const userPosts = Post.find({user: post.user}).exec();
+        res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`, userPosts});
+    });
 };
 
 module.exports = {
