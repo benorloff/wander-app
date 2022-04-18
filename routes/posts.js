@@ -3,11 +3,11 @@ const router = express.Router();
 const postsCtrl = require('../controllers/posts');
 const isLoggedIn = require('../config/auth');
 
-router.post('/', isLoggedIn, postsCtrl.create);
 router.get('/new', isLoggedIn, postsCtrl.new);
 // Display all of an authenticated user's journals
 router.get('/', isLoggedIn, postsCtrl.index);
 // Display all public journals by all users
+router.post('/', isLoggedIn, postsCtrl.create);
 router.get('/all', postsCtrl.allPosts);
 router.get('/:id', postsCtrl.show);
 router.get('/:id/edit', isLoggedIn, postsCtrl.edit);
