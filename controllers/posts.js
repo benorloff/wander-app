@@ -40,6 +40,7 @@ async function create(req, res) {
     } else {
         req.body.isPublished = false;
     };
+    console.log(req.body);
     try {
         Post.create(req.body).then(function(err, post) {
             if (err) {
