@@ -56,6 +56,9 @@ app.use(function (req, res, next) {
 });
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Route to the TinyMCE Node module
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
 // mount all routes with appropriate base paths
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
