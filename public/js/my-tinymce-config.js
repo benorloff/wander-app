@@ -1,4 +1,5 @@
 tinymce.init({
-    selector: 'textarea#my-expressjs-tinymce-app',
-    plugins: 'lists link image table code help wordcount'
+    selector: 'textarea',
+    plugins: 'lists link image table code help wordcount',
+    element_format: 'html'
   });
