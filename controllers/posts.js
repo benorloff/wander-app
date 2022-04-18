@@ -43,10 +43,6 @@ async function create(req, res) {
     console.log(req.body);
     try {
         Post.create(req.body).then(function(err, post) {
-            if (err) {
-                console.log(err);
-                return res.redirect('/posts/new');
-            }
             const usersPosts = Post.find({user: req.user._id}).exec();
             const usersPostCount = usersPosts.length;
             updateBadges(req, usersPostCount);
