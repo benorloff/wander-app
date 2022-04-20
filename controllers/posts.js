@@ -85,8 +85,7 @@ async function deletePost(req, res) {
     console.log(`${posts} <- posts`)
     const usersPostCount = posts.length;
     console.log(`${usersPostCount} <- user's post count`)
-    // await updateBadges(res, req, usersPostCount);
-    req.flash('success', 'Post deleted successfully!')
+    await updateBadges(res, req, usersPostCount);
     res.redirect(`/users/${req.user._id}`)
 };
 
