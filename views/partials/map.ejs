@@ -1,7 +1,7 @@
 <script>
     const mapLng = document.querySelector('#mapLng').innerText;
     const mapLat = document.querySelector('#mapLat').innerText;
-    const isoCodes = document.querySelector('#isoCodes').innerText.toUpperCase();
+    let isoCodes = document.querySelector('#isoCodes').innerText.toUpperCase();
     const zoom = document.querySelector('#zoom').innerText;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmVub3Jsb2ZmIiwiYSI6ImNsMXR0aXE3cjBpbDMzaXF2bGdkcHJ6cHAifQ.Ju341IcUlEvqkZXhSkY1Aw';
@@ -32,10 +32,6 @@
         'country-label'
       );
 
-      map.setFilter('country-boundaries', [
-        "in",
-        "iso_3166_1_alpha_3",
-        isoCodes
-      ]);
+      map.setFilter("country-boundaries", ["all", ["match", ["get", "iso_3166_1_alpha_3"], isoCodes, true, false]]);
     });
 </script>

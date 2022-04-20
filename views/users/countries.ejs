@@ -4,12 +4,8 @@
 <div style="display:none;">
     <span id="mapLat">0</span>
     <span id="mapLng">0</span>
-    <span id="isoCodes">
-        <% userCountries.forEach(c => { %>
-            <%=`'${c.isoCodeAlpha3.toUpperCase()}', `%>
-        <% }); %>
-    </span>
-  <span id="zoom">1</span>
+    <span id="isoCodes"><% userCountries.forEach(c => { %><%- `${c.isoCodeAlpha3.toUpperCase()} ` %><% }); %></span>
+    <span id="zoom">1</span>
 </div>
 <%- include('../partials/map') %>
 
