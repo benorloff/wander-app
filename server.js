@@ -19,9 +19,6 @@ const countriesRouter = require('./routes/countries');
 const postsRouter = require('./routes/posts');
 const badgesRouter = require('./routes/badges');
 
-// flash message middleware
-const flash = require('connect-flash');
-
 // create the Express app
 const app = express();
 
@@ -50,7 +47,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // Add this middleware BELOW passport middleware
 app.use(function (req, res, next) {
   res.locals.user = req.user; // assinging a property to res.locals, makes that said property (user) availiable in every
@@ -61,9 +57,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Route to the TinyMCE Node module
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
-
-// mount the flash middleware
-app.use(flash());
 
 // mount all routes with appropriate base paths
 app.use('/', indexRouter);

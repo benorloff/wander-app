@@ -85,7 +85,9 @@ async function deletePost(req, res) {
     console.log(`${posts} <- posts`)
     const usersPostCount = posts.length;
     console.log(`${usersPostCount} <- user's post count`)
-    updateBadges(res, req, usersPostCount);
+    // await updateBadges(res, req, usersPostCount);
+    req.flash('success', 'Post deleted successfully!')
+    res.redirect(`/users/${req.user._id}`)
 };
 
 async function updateBadges(res, req, usersPostCount) {
@@ -105,7 +107,6 @@ async function updateBadges(res, req, usersPostCount) {
             console.log(`user has been added to ${b.name} badge`)
         }
     })
-    res.redirect(`/users/${req.user._id}`);
 }
 
 module.exports = {
