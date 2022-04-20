@@ -27,13 +27,13 @@ function newPost(req, res) {
 
 async function create(req, res) {
     // Get the country doc so we can update req.body
-    req.body.country = country._id;
     const country = await Country.findOne({name: req.body.country}).exec();
     req.body.user = req.user._id;
     req.body.userName = req.user.name;
     req.body.userAvatar = req.user.avatar;
     req.body.userUri = `/users/${req.user._id}`;
     req.body.isPrivate = !!req.body.isPrivate;
+    req.body.country = country._id;
     req.body.countryName = country.name;
     req.body.countryFlagUri = `/images/flags/${country.isoCodeAlpha2}.png`;
     if (req.body.isPublished === 'Publish') {
@@ -79,14 +79,16 @@ async function update(req, res) {
 };
 
 async function deletePost(req, res) {
-    await Post.findByIdAndRemove(req.params.id);
+    const post = await Post.findByIdAndRemove(req.params.id);
+    console.log(`${post} <- deleted post`)
     const posts = await Post.find({user: req.user._id});
+    console.log(`${posts} <- posts`)
     const usersPostCount = posts.length;
-    updateBadges(req, usersPostCount);
-    res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`, posts});
+    console.log(`${usersPostCount} <- user's post count`)
+    updateBadges(res, req, usersPostCount);
 };
 
-async function updateBadges(req, usersPostCount) {
+async function updateBadges(res, req, usersPostCount) {
     console.log('hit updateBadges');
     const journalBadges = await Badge.find({name: {$regex: /^journals/}}).exec();
     journalBadges.forEach(b => {
@@ -103,6 +105,7 @@ async function updateBadges(req, usersPostCount) {
             console.log(`user has been added to ${b.name} badge`)
         }
     })
+    res.redirect(`/users/${req.user._id}`);
 }
 
 module.exports = {
