@@ -18,10 +18,10 @@ async function index(req, res) {
 };
 
 async function show(req, res) {
-    const userCountries = await Country.find({usersVisited: req.user._id}).exec();
-    const userPosts = await Post.find({user: req.user._id}).exec();
-    const userBadges = await Badge.find({usersCollected: req.params.id}).exec();
-    res.render('users/show', {title: 'User Profile', userCountries, userPosts, userBadges})
+    const userCountries = await Country.find({usersVisited: req.user._id}).sort({ name: 'asc'});
+    const posts = await Post.find({user: req.user._id}).sort({ createdAt: 'desc'});
+    const userBadges = await Badge.find({usersCollected: req.params.id}).sort({ name: 'asc', numValue: 'asc'});
+    res.render('users/show', {title: 'User Profile', userCountries, posts, userBadges})
 };
 
 async function countries(req, res) {

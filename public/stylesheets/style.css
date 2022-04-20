@@ -28,7 +28,7 @@ body {
   background-color: var(--color-surface-dark);
 }
 
-p, h1, h2, h3, h4, h5, h6, span, button, a, i, label {
+p, h1, h2, h3, h4, h5, h6, button, a, span, i, label {
   color: var(--color-text-light);
 }
 

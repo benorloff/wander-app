@@ -3,8 +3,8 @@ const Country = require('../models/country');
 const Badge = require('../models/badge');
 
 async function index(req, res) {
-    const userPosts = await Post.find({user: req.user._id}).exec();
-    res.render('users/posts', {title: 'My Posts', userPosts})
+    const posts = await Post.find({user: req.user._id}).exec();
+    res.render('users/posts', {title: 'My Posts', posts})
 };
 
 function allPosts(req, res) {
@@ -79,15 +79,11 @@ async function update(req, res) {
 };
 
 async function deletePost(req, res) {
-    const post = await Post.findById(req.params.id);
-    console.log(post.user);
-    if (!post.user.equals(req.user._id)) return res.redirect(`/posts/${req.params.id}`);
-    post.remove().then(function() {
-        const userPosts = Post.find({user: post.user}).exec();
-        const usersPostCount = userPosts.length;
-        updateBadges(req, usersPostCount);
-        res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`, userPosts});
-    });
+    await Post.findByIdAndRemove(req.params.id);
+    const posts = await Post.find({user: req.user._id});
+    const usersPostCount = posts.length;
+    updateBadges(req, usersPostCount);
+    res.render('users/posts', {title: `${req.user.name}'s Posts on Wander`, posts});
 };
 
 async function updateBadges(req, usersPostCount) {

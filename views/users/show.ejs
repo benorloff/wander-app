@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <p style="margin-bottom: 50px;"><%= user.bio %></p>
+    <p class="my-5"><%- user.bio %></p>
     <h2>Stats</h2>
     <div class="profile-stats">
         <div class="stats-card flags-collected">
@@ -33,7 +33,7 @@
             <h3>Badges Collected</h3>
             <div>
                 <% userBadges.forEach(b => { %>
-                    <img src="<%= b.badgeImageUri %>" alt="<%= b.name %>" title="<%= b.name %>">
+                    <img src="<%= b.badgeImageUri %>" alt="<%= b.name %>" data-toggle="tooltip" data-placement="top" title="<%= b.name %>">
                 <% }); %>
             </div>
         </div>
@@ -46,32 +46,8 @@
         </div>
     </div>
     <h2>Journals</h2>
-    <div class="profile-posts">
-        <% if (userPosts.length > 0) { %>
-            <% userPosts.forEach(p => { %>
-                <div class="d-flex flex-column post-card">
-                    <div class="d-flex mb-2 justify-content-between post-card-header">
-                        <div class="d-flex flag">
-                            <img src="<%= p.countryFlagUri %>">
-                            <h4><a href="/posts/<%= p._id %>"><% if (p.title.length < 50) { %>
-                                <%= p.title %></a></h4>
-                            <% } else { %>
-                                <%= p.title.substring(0,30) %>...</a></h4>   
-                            <% } %>
-                        </div>
-                        <div class="d-flex justify-content-end details">
-                            <img src="<%= p.userAvatar %>" class="user-nav-img">
-                        </div>
-                    </div>
-                    <div class="post-card-excerpt">
-                        <p><%- p.content.substring(0, 100) %><% if (p.content.length > 100) { %><span>...</span><% } %></p>
-                    </div>
-                </div>
-            <% }); %>
-        <% } else { %>
-             <p>No journal entries yet. <% if (user && user._id === req.params.id) { %><a href="/posts/new">Create a new journal.</a><% } %></p>
-        <% } %>
-    </div>
+    
+    <%- include('../partials/posts-loop') %>
 
 </div>
 

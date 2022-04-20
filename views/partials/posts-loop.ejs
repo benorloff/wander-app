@@ -1,0 +1,41 @@
+<div class="profile-posts">
+    <% if (posts.length > 0) { %>
+        <% posts.forEach(p => { %>
+            <div class="d-flex flex-column post-card">
+                <div class="d-flex mb-2 justify-content-between post-card-header">
+                    <div class="d-flex flag">
+                        <img src="<%= p.countryFlagUri %>" data-toggle="tooltip" data-placement="top" title="<%= p.countryName %>">
+                        <h4><a href="/posts/<%= p._id %>"><% if (p.title.length < 50) { %>
+                            <%= p.title %></a></h4>
+                        <% } else { %>
+                            <%= p.title.substring(0,50) %>...</a></h4>   
+                        <% } %>
+                    </div>
+                </div>
+                <div class="post-card-excerpt">
+                    <p><%- p.content.substring(0, 200) %><% if (p.content.length > 200) { %><span>...</span><% } %></p>
+                </div>
+                <div class="d-flex">
+                    <div class="d-flex align-items-center w-50">
+                        <a href="/users/<%= p.user %>"><img src="<%= p.userAvatar %>" class="user-nav-img"></a>
+                        <a href="/users/<%= p.user %>"><p class="mb-0 mx-3"><strong><%= p.userName %></strong></p></a>
+                        <p class="mb-0 mx-2" data-toggle="tooltip" data-placement="top" title="Published"><small><%= p.createdAt.toDateString() %></small></p>
+                        <% if (p.isPrivate === false) { %>
+                            <i class="fa-solid fa-globe mx-3" data-toggle="tooltip" data-placement="top" title="Public"></i>
+                        <% } else if (p.isPrivate === true) { %>
+                            <i class="fa-solid fa-eye-slash mx-3" data-toggle="tooltip" data-placement="top" title="Private"></i>
+                        <% } %>
+                        <% if (p.isPublished === false) { %>
+                            <span class="badge badge-pill bg-light text-dark mx-3">Draft</span>
+                        <% } %>
+                    </div>
+                    <div class="d-flex justify-content-end w-50">
+                        <form action="/posts/<%= p._id %>" method="GET"><button type="submit" class="btn btn-primary">Read</button></form>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+            <p>No journal entries yet. <% if (user && user._id === req.params.id) { %><a href="/posts/new">Create a new journal.</a><% } %></p>
+    <% } %>
+</div>
