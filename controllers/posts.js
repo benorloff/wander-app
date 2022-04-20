@@ -27,13 +27,13 @@ function newPost(req, res) {
 
 async function create(req, res) {
     // Get the country doc so we can update req.body
+    req.body.country = country._id;
     const country = await Country.findOne({name: req.body.country}).exec();
     req.body.user = req.user._id;
     req.body.userName = req.user.name;
     req.body.userAvatar = req.user.avatar;
     req.body.userUri = `/users/${req.user._id}`;
     req.body.isPrivate = !!req.body.isPrivate;
-    req.body.country = country._id;
     req.body.countryName = country.name;
     req.body.countryFlagUri = `/images/flags/${country.isoCodeAlpha2}.png`;
     if (req.body.isPublished === 'Publish') {
