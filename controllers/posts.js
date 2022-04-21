@@ -8,7 +8,7 @@ async function index(req, res) {
 };
 
 async function allPosts(req, res) {
-    const posts = await Post.find({ isPrivate: false }).sort({ createdAt: 'desc'});
+    const posts = await Post.find({ isPrivate: false, isPublished: true }).sort({ createdAt: 'desc'});
     res.render('posts/all', {title: 'All Posts', posts})
 };
 

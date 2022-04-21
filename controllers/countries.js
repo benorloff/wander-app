@@ -7,10 +7,9 @@ async function index(req, res) {
     res.render('countries/index', {title: 'My Countries', userCountries})
 };
 
-function allCountries(req, res) {
-    Country.find({}, function (err, countries) {
-        res.render('countries/all', {title: 'All Countries', countries})
-    })
+async function allCountries(req, res) {
+    const countries = await Country.find({}).sort({ name: 'asc'})
+    res.render('countries/all', {title: 'All Countries', countries})
 };
 
 async function show(req, res) {

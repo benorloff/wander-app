@@ -16,11 +16,11 @@
             <img src="/images/flags/<%= c.isoCodeAlpha2 %>.png" alt="<%= c.name %>">
             <div class="country-list-result-info">
                 <h5><%= c.name %></h5>
-                <a href="/countries/<%= c.id %>" class="btn btn-light">Explore</a>
+                <form action="/countries/<%= c.id %>" method="GET"><button type="submit" value="Explore" class="btn btn-light rounded mx-2" data-toggle="tooltip" data-placement="top" title="Explore"><i class="fa-solid fa-eye"></i></button></form>
                 <% if (user && c.usersVisited.includes(user._id) ) { %>
-                    <form action="/countries/<%= c.id %>?_method=PUT" method="POST"><button type="submit" value="Remove" class="btn btn-danger">Remove</button></form>
+                    <form action="/countries/<%= c.id %>?_method=PUT" method="POST"><button type="submit" value="Remove" class="btn btn-danger rounded" data-toggle="tooltip" data-placement="top" title="Remove Visit"><i class="fa-solid fa-xmark fa-lg"></i></button></form>
                 <% } else { %>
-                    <form action="/countries/<%= c.id %>" method="POST"><button type="submit" value="Add"class="btn btn-primary">Add</button></form>
+                    <form action="/countries/<%= c.id %>" method="POST"><button type="submit" value="Add"class="btn btn-primary rounded" data-toggle="tooltip" data-placement="top" title="Add Visit"><i class="fa-solid fa-plus"></i></button></form>
                 <% } %>
             </div>
         </div>

@@ -26,9 +26,10 @@
 
 body {
   background-color: var(--color-surface-dark);
+  min-height: 100vh;
 }
 
-p, h1, h2, h3, h4, h5, h6, button, a, span, i, label {
+p, h1, h2, h3, h4, h5, h6, button, a, span, label {
   color: var(--color-text-light);
 }
 
@@ -62,8 +63,10 @@ a:hover {
 }
 
 .footer {
-  position: relative;
-  bottom: 0px;
+  display: block;
+  height: 60px;
+  width: 100%;
+  bottom: 0;
 }
 
 .footer-container {

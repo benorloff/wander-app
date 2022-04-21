@@ -8,7 +8,12 @@
             <h2><%= country.name %></h2>
           </div>
           <div class="d-flex align-items-md-center right">
-            <form action="/posts/new?" method="GET"><button class="btn btn-primary">Add Journal</button></form>
+            <% if (user && !country.usersVisited.includes(user._id)) { %>
+              <form action="/countries/<%= country.id %>" method="POST"><button type="submit" value="Add" class="btn btn-primary rounded mx-3" data-toggle="tooltip" data-placement="top" title="Add Visit"><i class="fa-solid fa-plus"></i></button></form>
+            <% } else if (user && country.usersVisited.includes(user._id)) { %>
+              <form action="/countries/<%= country.id %>?_method=PUT" method="POST"><button type="submit" value="Remove" class="btn btn-danger rounded mx-3" data-toggle="tooltip" data-placement="top" title="Remove Visit"><i class="fa-solid fa-xmark fa-lg"></i></button></form>
+            <% } %>
+            <form action="/posts/new" method="GET"><button class="btn btn-primary rounded" data-toggle="tooltip" data-placement="top" title="Add Journal"><i class="fa-solid fa-marker"></i></button></form>
           </div>
         </div>
     </nav>
