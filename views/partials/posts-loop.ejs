@@ -21,9 +21,9 @@
                         <a href="/users/<%= p.user %>"><p class="mb-0 mx-3"><strong><%= p.userName %></strong></p></a>
                         <p class="mb-0 mx-2" data-toggle="tooltip" data-placement="top" title="Published"><small><%= p.createdAt.toDateString() %></small></p>
                         <% if (p.isPrivate === false) { %>
-                            <i class="fa-solid fa-globe mx-3" data-toggle="tooltip" data-placement="top" title="Public"></i>
+                            <i class="fa-solid fa-globe mx-3 text-light" data-toggle="tooltip" data-placement="top" title="Public"></i>
                         <% } else if (p.isPrivate === true) { %>
-                            <i class="fa-solid fa-eye-slash mx-3" data-toggle="tooltip" data-placement="top" title="Private"></i>
+                            <i class="fa-solid fa-eye-slash mx-3 text-light" data-toggle="tooltip" data-placement="top" title="Private"></i>
                         <% } %>
                         <% if (p.isPublished === false) { %>
                             <span class="badge badge-pill bg-light text-dark mx-3">Draft</span>
