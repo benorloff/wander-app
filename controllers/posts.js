@@ -7,10 +7,9 @@ async function index(req, res) {
     res.render('users/posts', {title: 'My Posts', posts})
 };
 
-function allPosts(req, res) {
-    Post.find({}, function(err, posts) {
-        res.render('posts/all', {title: 'All Posts', posts})
-    })
+async function allPosts(req, res) {
+    const posts = await Post.find({ isPrivate: false }).sort({ createdAt: 'desc'});
+    res.render('posts/all', {title: 'All Posts', posts})
 };
 
 async function show(req, res) {
