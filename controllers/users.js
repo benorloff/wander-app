@@ -18,10 +18,12 @@ async function index(req, res) {
 };
 
 async function show(req, res) {
+    const profile = await User.findById(req.params.id).exec();
+    console.log(profile);
     const userCountries = await Country.find({usersVisited: req.params.id}).sort({ name: 'asc'});
     const posts = await Post.find({user: req.params.id}).sort({ createdAt: 'desc'});
     const userBadges = await Badge.find({usersCollected: req.params.id}).sort({ name: 'asc', numValue: 'asc'});
-    res.render('users/show', {title: 'User Profile', userCountries, posts, userBadges})
+    res.render('users/show', {title: 'User Profile', profile, userCountries, posts, userBadges})
 };
 
 async function countries(req, res) {
